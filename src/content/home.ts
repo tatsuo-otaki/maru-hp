@@ -33,8 +33,23 @@ export const ABOUT = {
   emphasis: "高い技術力と、誰も取り残さない仕組みを。",
   /** 3事業の予告（次セクションへの布石） */
   pillars: [
-    { num: "01", label: "AI開発", color: "var(--color-teal)" },
-    { num: "02", label: "AI教育", color: "var(--color-amber)" },
-    { num: "03", label: "社会参加", color: "var(--color-navy)" },
+    {
+      num: "01",
+      label: "AI開発",
+      desc: "企業や社会の課題を解決するシステムを企画・開発。",
+      color: "var(--color-teal)",
+    },
+    {
+      num: "02",
+      label: "AI教育",
+      desc: "AIを実装し、実際の仕事を遂行できる人材を育成。",
+      color: "var(--color-amber)",
+    },
+    {
+      num: "03",
+      label: "社会参加",
+      desc: "学んだ力を実務・就労・社会参加につなげる。",
+      color: "var(--color-navy)",
+    },
   ],
 } as const;
