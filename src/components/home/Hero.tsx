@@ -63,8 +63,10 @@ export function Hero() {
             </span>
           </motion.div>
 
-          {/* Mission 本文（行単位リビール） */}
-          <h1 className="font-ja text-hero font-medium text-navy">
+          {/* Mission 本文（行単位リビール）
+              lg 帯(1024–1279)は写真で列幅が狭く 56px だと折り返すため一段小さくし、
+              xl(≥1280) で本来の text-hero(最大56px) に戻す。 */}
+          <h1 className="font-ja text-hero font-medium text-navy lg:text-[2.75rem] xl:text-hero">
             {HERO.missionLines.map((line, i) => (
               <span key={line} className="block overflow-hidden">
                 <motion.span
@@ -147,7 +149,7 @@ export function Hero() {
           >
             {/* 写真円 */}
             <motion.div
-              className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] lg:w-[440px]"
+              className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] lg:w-[380px] xl:w-[440px]"
               initial={reduced ? false : { scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={
@@ -161,7 +163,7 @@ export function Hero() {
                 alt={HERO.photo.alt}
                 fill
                 priority
-                sizes="(max-width: 640px) 240px, (max-width: 1024px) 340px, 440px"
+                sizes="(max-width: 640px) 240px, (max-width: 1024px) 340px, (max-width: 1280px) 380px, 440px"
                 className="object-cover"
               />
             </motion.div>
