@@ -53,3 +53,60 @@ export const ABOUT = {
     },
   ],
 } as const;
+
+export const BUSINESS = {
+  label: "Business",
+  headingLines: ["3つの事業をつなぎ、", "幸せに働ける人を増やします。"],
+  intro:
+    "開発、教育、仕事の機会を別々に提供するのではなく、一つの循環としてつなげることが、株式会社〇の特徴です。",
+  items: [
+    {
+      num: "01",
+      title: "AI・システム開発",
+      en: "AI & System Development",
+      color: "teal" as const,
+      lead: "AIやデータを活用し、企業や社会が抱える課題を解決するシステムを企画・開発します。",
+      works: [
+        "AIシステム・AIエージェントの開発",
+        "Webアプリケーション・業務システムの開発",
+        "DX・業務効率化支援",
+        "データ分析・データ活用",
+        "AI導入の企画・実証実験",
+        "既存業務やサービスへのAI組み込み",
+      ],
+      cta: { label: "AI・システム開発について", href: "/business#ai-development" },
+    },
+    {
+      num: "02",
+      title: "AI教育・人材育成",
+      en: "AI Education & Training",
+      color: "amber" as const,
+      lead: "AIを使うだけでなく、AIを実装し、実際の仕事を遂行できる人材を育成します。",
+      works: [
+        "AIを活用したプログラミング教育",
+        "AIエージェント・AIアプリの開発教育",
+        "Python、Web開発、データ分析の技術教育",
+        "実務を想定したプロジェクト型学習",
+        "企業向けAI・DX人材育成",
+        "学生・社会人・海外向けの教育",
+      ],
+      cta: { label: "AI教育・人材育成について", href: "/business#ai-education" },
+    },
+    {
+      num: "03",
+      title: "仕事と社会参加の仕組みづくり",
+      en: "Social Participation Design",
+      color: "navy" as const,
+      lead: "教育、企業、地域、就労支援をつなぎ、誰もが学んだ力を仕事として発揮できる仕組みをつくります。",
+      works: [
+        "教育修了者への実務機会の提供",
+        "企業案件と人材のマッチング",
+        "地方人材への仕事の提供",
+        "通勤が難しい人へのリモートワーク機会の提供",
+        "就労継続支援A型・B型事業所との連携",
+        "講師・高度人材による品質管理",
+      ],
+      cta: { label: "連携・協業について相談する", href: "/contact" },
+    },
+  ],
+} as const;
