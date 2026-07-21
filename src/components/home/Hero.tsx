@@ -42,9 +42,9 @@ export function Hero() {
         <div className="absolute right-[280px] top-1/2 -mt-[290px] h-[580px] w-[580px] rounded-full border border-[rgba(45,139,125,0.08)]" />
       </motion.div>
 
-      <Container className="relative flex flex-col gap-12 py-16 lg:min-h-[86vh] lg:flex-row lg:items-center lg:gap-10 lg:py-24">
+      <Container className="relative flex flex-col gap-12 py-16 md:flex-row md:items-center md:gap-8 md:py-20 lg:min-h-[86vh] lg:gap-10 lg:py-24">
         {/* 左：コンテンツ */}
-        <div className="relative z-10 lg:max-w-[560px] lg:flex-1 lg:pr-6">
+        <div className="relative z-10 md:flex-1 md:pr-4 lg:max-w-[560px] lg:pr-6">
           {/* Mission ラベル */}
           <motion.div className="mb-8 flex items-center gap-2.5" {...fade(0.1)}>
             <motion.span
@@ -66,7 +66,7 @@ export function Hero() {
           {/* Mission 本文（行単位リビール）
               lg 帯(1024–1279)は写真で列幅が狭く 56px だと折り返すため一段小さくし、
               xl(≥1280) で本来の text-hero(最大56px) に戻す。 */}
-          <h1 className="font-ja text-hero font-medium text-navy lg:text-[2.75rem] xl:text-hero">
+          <h1 className="font-ja text-hero font-medium text-navy md:text-[2.25rem] lg:text-[2.75rem] xl:text-hero">
             {HERO.missionLines.map((line, i) => (
               <span key={line} className="block overflow-hidden">
                 <motion.span
@@ -137,7 +137,7 @@ export function Hero() {
         </div>
 
         {/* 右：円形写真＋装飾 */}
-        <div className="relative z-0 mx-auto lg:mx-0 lg:flex-shrink-0">
+        <div className="relative z-0 mx-auto md:mx-0 md:flex-shrink-0">
           <motion.div
             className="relative"
             animate={reduced ? undefined : { y: [0, -12, 0] }}
@@ -149,7 +149,7 @@ export function Hero() {
           >
             {/* 写真円 */}
             <motion.div
-              className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] lg:w-[380px] xl:w-[440px]"
+              className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] md:w-[280px] lg:w-[360px] xl:w-[440px]"
               initial={reduced ? false : { scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={
@@ -163,7 +163,7 @@ export function Hero() {
                 alt={HERO.photo.alt}
                 fill
                 priority
-                sizes="(max-width: 640px) 240px, (max-width: 1024px) 340px, (max-width: 1280px) 380px, 440px"
+                sizes="(max-width: 640px) 240px, (max-width: 767px) 340px, (max-width: 1023px) 280px, (max-width: 1279px) 360px, 440px"
                 className="object-cover"
               />
             </motion.div>
