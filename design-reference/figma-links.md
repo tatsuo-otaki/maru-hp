@@ -8,6 +8,15 @@
 
 https://www.figma.com/make/uK5pZxspwam8UuTLH4rc5f/Corporate-Site-Design-Concepts?t=I1cdyzzyGDkiVaRE-1
 
+## Home Sections（Claude が実装から起こした編集可能リファレンス）
+
+https://www.figma.com/design/5T4kfjYG3m1XaJLztY9MDU
+
+- fileKey: `5T4kfjYG3m1XaJLztY9MDU`
+- `maru/color` 変数（warm/navy/teal/amber/muted/surface/white/line）を定義
+- 「About Section」フレーム：中央寄せ見出し＋本文＋強調＋3事業カード＋背景〇
+- 実装（src/components/home/About.tsx）と対応。デザイン調整はここで検討し、コードへ反映する運用。
+
 ## Home Desktop
 
 （未提供 / Figma Make 内の該当フレームを参照）
