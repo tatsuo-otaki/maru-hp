@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────────────────────
+   Design tokens — 出典: docs/brand-guide.md (Figma Make Foundations)
+   Tailwind v4: @theme のトークンがそのままユーティリティを生成する。
+   例) --color-navy → bg-navy / text-navy / border-navy
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  /* Color */
+  --color-warm: #f8f6f2; /* Warm White — ベース背景 */
+  --color-navy: #0f1f3d; /* Deep Navy — 文字・主要UI */
+  --color-teal: #2d8b7d; /* Teal — 主アクセント */
+  --color-amber: #c4873c; /* Amber — 副アクセント */
+  --color-surface: #eef2f8; /* カード等のサーフェス */
+  --color-muted: #6b7a8d; /* 補助テキスト */
+  --color-dark: #0a1629; /* ダーク面 */
+  --color-line: rgba(15, 31, 61, 0.09); /* ボーダー */
+
+  /* Fonts (next/font が注入する CSS 変数を参照) */
+  --font-ja: var(--font-noto-sans-jp), sans-serif;
+  --font-en: var(--font-inter), sans-serif;
+
+  /* Type scale — 見出しは clamp で 34→56px 等に追従 (Mobile→Desktop) */
+  --text-hero: clamp(2.125rem, 1.19rem + 3.7vw, 3.5rem); /* 34 → 56 */
+  --text-hero--line-height: 1.55;
+  --text-h1: clamp(2rem, 1.55rem + 1.8vw, 2.75rem); /* 32 → 44 */
+  --text-h1--line-height: 1.5;
+  --text-h2: clamp(1.375rem, 1.14rem + 0.9vw, 1.75rem); /* 22 → 28 */
+  --text-h2--line-height: 1.5;
+  --text-h3: clamp(1rem, 0.94rem + 0.25vw, 1.125rem); /* 16 → 18 */
+  --text-h3--line-height: 1.5;
+  --text-body-lg: 1rem; /* 16 */
+  --text-body-lg--line-height: 2;
+  --text-body: 0.875rem; /* 14 */
+  --text-body--line-height: 1.9;
+  --text-caption: 0.6875rem; /* 11 */
+  --text-caption--line-height: 1.75;
+  --text-label: 0.5625rem; /* 9 — 英字ラベル */
+  --text-label--line-height: 1;
+
+  /* Radius */
+  --radius-btn: 3px;
+  --radius-card: 4px;
+
+  /* Shadow */
+  --shadow-card: 0 10px 28px rgba(15, 31, 61, 0.09);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-warm);
+  color: var(--color-navy);
+  font-family: var(--font-ja);
+}
+
+/* フォーカス表示 — キーボード操作時のみリングを出す */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Reduced Motion — 動きを一律で無効化（内容は静止で理解できる） */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
