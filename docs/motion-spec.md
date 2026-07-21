@@ -35,19 +35,17 @@
 - `prefers-reduced-motion` では静止表示。
 - CursorDot（カーソル追従〇, mixBlendMode:multiply）は PC のみ・任意。
 
-## ⚠️ 要協議：スクロールジャック演出
+## スクロール演出の方針【決定：通常スクロール + フェード】
 
-Figma Make のデスクトップ版は以下の重いスクロール演出を含む。要件・CLAUDE.md の
-「スクロールを奪わない／読むために待たせない」と衝突しうるため、実装方針を決める必要がある。
+Figma Make のデスクトップ版は 400vh/600vh の Sticky スクロールジャックを含むが、
+要件・CLAUDE.md の「スクロールを奪わない／読むために待たせない」を優先し、**採用しない**。
 
-- 事業セクション：400vh の Sticky + 三角 SVG スクロール演出
-- Vision セクション：600vh の Sticky スクロールスナップ
-- Hero 離脱時：〇が scale 1→2.9 に拡大
-
-方針候補：
-1. Make の演出を尊重し、Desktop のみ GSAP ScrollTrigger で忠実に再現（重い・保守コスト高）
-2. Sticky スクロールを廃し、通常縦スクロール + whileInView フェードに簡略化（原則優先・推奨）
-3. 折衷：〇の拡大や接続線描画など「短く完結する」演出のみ採用し、長時間の scroll-jack は不採用
+- 事業セクション：Sticky（400vh）を廃止 → 通常縦スクロール + `whileInView` フェードイン。
+- Vision セクション：Sticky（600vh）を廃止 → 通常縦スクロールのリスト表示。
+- Hero 離脱時の〇拡大：長い scroll-jack はしない。Hero 内の 8s 浮遊のみ、または
+  短く完結するスクロール連動（数十vh 以内）に留める。
+- 接続線の `pathLength` 描画など「短く完結する」演出は可。
+- GSAP ScrollTrigger は原則不使用（本方針では登場箇所なし）。
 
 ## 各セクション（Make に無い要件セクションは今後追記）
 
