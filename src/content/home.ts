@@ -196,3 +196,55 @@ export const PROJECTS = {
     },
   ],
 } as const;
+
+export const MISSION = {
+  label: "Mission",
+  headingLines: ["幸せに働ける人を", "世界中に増やす。"],
+  body: "働くことは、単にお金を得るための行為ではありません。自分の力を活かし、誰かの役に立ち、社会に価値を届けること。そして、その活動を通じて、自分自身も幸せを感じること。私たちは、一人ひとりが自分らしく働き、誰かの幸せをつくれる社会を目指します。",
+  cta: { label: "株式会社〇の考えを知る", href: "/about" },
+} as const;
+
+export const VISION = {
+  label: "Vision",
+  heading: "私たちが実現する5つの変化",
+  intro:
+    "株式会社〇は、「働く」「組織」「経済」「教育」「相互理解」の5つの領域から、これからの社会のあり方を変えていきます。",
+  cta: { label: "Mission・Visionを詳しく見る", href: "/about" },
+  items: [
+    {
+      num: "01",
+      title: "「働く」の概念を変える",
+      en: "Redefine Work",
+      desc: "お金のためだけに働くのではなく、自分の好きなことや得意なことを活かし、誰かの幸せや社会の価値につながる働き方を広げます。",
+      color: "teal" as const,
+    },
+    {
+      num: "02",
+      title: "組織の概念を変える",
+      en: "Reimagine Organizations",
+      desc: "規模や利益だけではなく、社員、顧客、地域、社会にどれだけ幸福を生み出したかによって評価される組織を増やします。",
+      color: "amber" as const,
+    },
+    {
+      num: "03",
+      title: "資本主義の次を作る",
+      en: "Beyond Capitalism",
+      desc: "資本主義の良さを活かしながら、その弊害を小さくし、お金だけではない価値や幸福も大切にされる新しい仕組みを考え、実践します。",
+      color: "teal" as const,
+    },
+    {
+      num: "04",
+      title: "世界の教育格差をなくす",
+      en: "Eliminate Education Gaps",
+      desc: "住んでいる場所、経済状況、身体的な条件にかかわらず、誰もが質の高い教育を受け、未来の選択肢を広げられる環境をつくります。",
+      color: "amber" as const,
+    },
+    {
+      num: "05",
+      title: "文化を超えた相互理解を作る",
+      en: "Cross-Cultural Understanding",
+      desc: "国や文化、言語、価値観の違いを越えて、お互いを知り、尊重し、思いやることのできる関係を育てます。",
+      color: "navy" as const,
+    },
+  ],
+} as const;
