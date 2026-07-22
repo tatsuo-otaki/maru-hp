@@ -6,6 +6,11 @@ import { Cycle } from "@/components/home/Cycle";
 import { Projects } from "@/components/home/Projects";
 import { Mission } from "@/components/home/Mission";
 import { Vision } from "@/components/home/Vision";
+import { MaruMeaning } from "@/components/home/MaruMeaning";
+import { Partner } from "@/components/home/Partner";
+import { Ceo } from "@/components/home/Ceo";
+import { News } from "@/components/home/News";
+import { ContactCta } from "@/components/home/ContactCta";
 
 export default function Home() {
   return (
@@ -18,7 +23,11 @@ export default function Home() {
       <Projects />
       <Mission />
       <Vision />
-      {/* 以降のセクションは次フェーズ以降で実装する */}
+      <MaruMeaning />
+      <Partner />
+      <Ceo />
+      <News />
+      <ContactCta />
     </>
   );
 }
