@@ -158,3 +158,41 @@ export const CYCLE = {
     { angle: 198, label: "社会への価値創出", sub: "Social Value", color: "amber" as const },
   ],
 } as const;
+
+export const PROJECTS = {
+  label: "Projects",
+  heading: "理想を、実際の活動へ。",
+  intro:
+    "株式会社〇は、国内外の企業、教育機関、学生、技術者と連携しながら、AI開発と教育の実践を重ねています。",
+  cta: { label: "プロジェクト・実績を見る", href: "/projects" },
+  items: [
+    {
+      cat: "AI教育",
+      color: "teal" as const,
+      title: "メタバース情報工学学校",
+      desc: "AI・プログラミング教育プログラムの開発と実施。国内外の学生100名以上が参加。",
+      feature: true,
+    },
+    {
+      cat: "AI開発",
+      color: "amber" as const,
+      title: "海外大学とのAI教育連携",
+      desc: "東南アジアの大学との教育プログラム共同開発。",
+      feature: false,
+    },
+    {
+      cat: "社会参加",
+      color: "navy" as const,
+      title: "就労支援AI人材育成",
+      desc: "就労継続支援事業所と連携し、AIスキルで就労機会を創出。",
+      feature: false,
+    },
+    {
+      cat: "AI開発",
+      color: "amber" as const,
+      title: "企業向けAI・DX支援",
+      desc: "中小企業のAI導入・DX推進を一貫サポート。",
+      feature: false,
+    },
+  ],
+} as const;

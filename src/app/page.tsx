@@ -3,6 +3,7 @@ import { About } from "@/components/home/About";
 import { Business } from "@/components/home/Business";
 import { Steps } from "@/components/home/Steps";
 import { Cycle } from "@/components/home/Cycle";
+import { Projects } from "@/components/home/Projects";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Business />
       <Steps />
       <Cycle />
+      <Projects />
       {/* 以降のセクションは次フェーズ以降で実装する */}
     </>
   );
