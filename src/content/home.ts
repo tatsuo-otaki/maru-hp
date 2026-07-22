@@ -144,3 +144,17 @@ export const STEPS = {
     },
   ],
 } as const;
+
+export const CYCLE = {
+  label: "Cycle",
+  heading: "技術、教育、仕事が循環する社会へ。",
+  center: "〇",
+  /** 円周上のノード（angle は度・-90 が真上、時計回り） */
+  nodes: [
+    { angle: -90, label: "企業・社会の課題", sub: "Problems & Needs", color: "navy" as const },
+    { angle: -18, label: "AI・システム開発", sub: "AI Development", color: "teal" as const },
+    { angle: 54, label: "AI教育・人材育成", sub: "AI Education", color: "amber" as const },
+    { angle: 126, label: "実務経験・就労機会", sub: "Real-World Work", color: "teal" as const },
+    { angle: 198, label: "社会への価値創出", sub: "Social Value", color: "amber" as const },
+  ],
+} as const;
