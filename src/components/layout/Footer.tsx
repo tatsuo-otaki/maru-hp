@@ -24,9 +24,17 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-ja text-[0.8125rem] text-muted transition-colors hover:text-teal"
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="inline-flex items-center gap-1 font-ja text-[0.8125rem] text-muted transition-colors hover:text-teal"
                 >
                   {item.label}
+                  {item.external && (
+                    <span aria-hidden="true" className="text-[0.7em]">
+                      ↗
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}

@@ -44,9 +44,17 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="font-ja text-[0.8125rem] text-navy transition-colors hover:text-teal"
+              {...(item.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="inline-flex items-center gap-1 font-ja text-[0.8125rem] text-navy transition-colors hover:text-teal"
             >
               {item.label}
+              {item.external && (
+                <span aria-hidden="true" className="text-[0.7em] text-muted">
+                  ↗
+                </span>
+              )}
             </Link>
           ))}
           {contact && (
@@ -97,10 +105,18 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-btn py-3 font-ja text-[0.9375rem] text-navy transition-colors hover:text-teal"
+                {...(item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="inline-flex items-center gap-1 rounded-btn py-3 font-ja text-[0.9375rem] text-navy transition-colors hover:text-teal"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
+                {item.external && (
+                  <span aria-hidden="true" className="text-[0.7em] text-muted">
+                    ↗
+                  </span>
+                )}
               </Link>
             ))}
             {contact && (
