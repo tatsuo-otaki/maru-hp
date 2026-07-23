@@ -5,7 +5,7 @@ import { Steps } from "@/components/home/Steps";
 import { Cycle } from "@/components/home/Cycle";
 import { Projects } from "@/components/home/Projects";
 import { Mission } from "@/components/home/Mission";
-import { Vision } from "@/components/home/Vision";
+import { VisionTeaser } from "@/components/home/VisionTeaser";
 import { MaruMeaningTeaser } from "@/components/home/MaruMeaningTeaser";
 import { Partner } from "@/components/home/Partner";
 import { CeoTeaser } from "@/components/home/CeoTeaser";
@@ -22,7 +22,7 @@ export default function Home() {
       <Cycle />
       <Projects />
       <Mission />
-      <Vision />
+      <VisionTeaser />
       <MaruMeaningTeaser />
       <Partner />
       <CeoTeaser />
