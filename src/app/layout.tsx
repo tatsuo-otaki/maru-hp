@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { HashScroll } from "@/components/layout/HashScroll";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -38,6 +39,7 @@ export default function RootLayout({
       className={`${notoSansJP.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-warm text-navy">
+        <HashScroll />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

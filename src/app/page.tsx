@@ -5,10 +5,10 @@ import { Steps } from "@/components/home/Steps";
 import { Cycle } from "@/components/home/Cycle";
 import { Projects } from "@/components/home/Projects";
 import { Mission } from "@/components/home/Mission";
-import { Vision } from "@/components/home/Vision";
-import { MaruMeaning } from "@/components/home/MaruMeaning";
+import { VisionTeaser } from "@/components/home/VisionTeaser";
+import { MaruMeaningTeaser } from "@/components/home/MaruMeaningTeaser";
 import { Partner } from "@/components/home/Partner";
-import { Ceo } from "@/components/home/Ceo";
+import { CeoTeaser } from "@/components/home/CeoTeaser";
 import { News } from "@/components/home/News";
 import { ContactCta } from "@/components/home/ContactCta";
 
@@ -22,10 +22,10 @@ export default function Home() {
       <Cycle />
       <Projects />
       <Mission />
-      <Vision />
-      <MaruMeaning />
+      <VisionTeaser />
+      <MaruMeaningTeaser />
       <Partner />
-      <Ceo />
+      <CeoTeaser />
       <News />
       <ContactCta />
     </>

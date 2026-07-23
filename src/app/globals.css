@@ -57,6 +57,11 @@ body {
   font-family: var(--font-ja);
 }
 
+/* アンカーリンク（#vision 等）で sticky ヘッダー(64px)に隠れないようにする */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
 /* フォーカス表示 — キーボード操作時のみリングを出す */
 :focus-visible {
   outline: 2px solid var(--color-teal);
