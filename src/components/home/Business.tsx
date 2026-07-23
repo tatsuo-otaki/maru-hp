@@ -1,182 +1,197 @@
+"use client";
+
 import { Fragment } from "react";
-import { Section } from "@/components/ui/Section";
+import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Reveal } from "@/components/ui/Reveal";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { BUSINESS } from "@/content/home";
 
 type Accent = "teal" | "amber" | "navy";
-
-/** 事業カラー名 → CSS 変数（インライン style で境界色・番号色などに使う） */
-const accentVar: Record<Accent, string> = {
+const COLOR: Record<Accent, string> = {
   teal: "var(--color-teal)",
   amber: "var(--color-amber)",
   navy: "var(--color-navy)",
 };
 
-/** カード間の循環コネクター（前の事業→次の事業へ、点線で接続） */
-function Connector({ from, to }: { from: Accent; to: Accent }) {
-  return (
-    <div
-      aria-hidden="true"
-      className="flex items-center gap-0 px-5 py-3 md:px-12"
-    >
-      <div className="flex w-12 shrink-0 justify-center md:w-[60px]">
-        <svg width="2" height="28" className="block">
-          <line
-            x1="1"
-            y1="0"
-            x2="1"
-            y2="28"
-            stroke={accentVar[to]}
-            strokeWidth="1.5"
-            strokeDasharray="3 3"
-            opacity="0.5"
-          />
-        </svg>
-      </div>
-      <div className="ml-3.5 flex items-center gap-1.5">
-        <span
-          className="h-1.5 w-1.5 rounded-full border-[1.5px]"
-          style={{ borderColor: accentVar[from] }}
-        />
-        <span className="h-px w-7 bg-navy/15" />
-        <span
-          className="h-1.5 w-1.5 rounded-full border-[1.5px]"
-          style={{ borderColor: accentVar[to] }}
-        />
-      </div>
-    </div>
-  );
-}
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Business() {
+  const reduced = usePrefersReducedMotion();
+
+  // reduced-motion 時はアニメーションを外して静止表示にする
+  const anim = (
+    initial: Record<string, number | string>,
+    whileInView: Record<string, number | string>,
+    transition: Record<string, unknown>,
+  ) =>
+    reduced
+      ? {}
+      : { initial, whileInView, viewport: { once: true } as const, transition };
+
   return (
-    <Section id="business" className="relative overflow-hidden">
-      {/* 背景の薄い〇 */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 right-[-160px] h-[360px] w-[360px] -translate-y-1/2 rounded-full border border-[rgba(15,31,61,0.04)] md:right-[-200px] md:h-[800px] md:w-[800px]"
-      />
-
+    <section id="business" className="bg-warm">
       {/* セクション見出し */}
-      <Reveal className="relative mb-9 text-center md:mb-14">
-        <div className="flex items-center justify-center gap-2.5">
-          <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
-          <SectionLabel>{BUSINESS.label}</SectionLabel>
-          <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
-        </div>
-        <h2 className="mt-5 font-ja text-[1.5rem] font-medium leading-[1.55] text-navy md:text-[2.25rem]">
-          {BUSINESS.headingLines.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-        </h2>
-        <p className="mx-auto mt-4 max-w-[560px] font-ja text-body leading-relaxed text-muted">
-          {BUSINESS.intro}
-        </p>
-      </Reveal>
+      <div className="border-b border-line px-6 pt-16 pb-12 md:px-20 md:pt-24 md:pb-[72px]">
+        <SectionLabel>{BUSINESS.label}</SectionLabel>
+        <motion.h2
+          className="mt-4 font-ja text-[1.875rem] font-light leading-[1.4] text-navy md:text-[2.75rem]"
+          {...anim({ opacity: 0, y: 18 }, { opacity: 1, y: 0 }, {
+            duration: 0.75,
+            ease: EASE,
+          })}
+        >
+          {BUSINESS.heading}
+        </motion.h2>
+      </div>
 
-      {/* 縦積み横長カード */}
-      <div className="relative flex flex-col">
-        {BUSINESS.items.map((biz, i) => {
-          const accent = biz.color as Accent;
-          return (
-            <Fragment key={biz.num}>
-              <Reveal delay={i * 0.05}>
-                <article className="flex flex-col items-start gap-6 rounded-[6px] border border-line bg-white p-7 md:flex-row md:gap-12 md:p-10">
-                  {/* 左：番号＋事業名＋リード */}
-                  <div className="w-full shrink-0 md:w-[36%]">
-                    <div className="mb-4 flex items-center gap-4">
-                      <span
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 md:h-[60px] md:w-[60px]"
-                        style={{ borderColor: accentVar[accent] }}
+      {BUSINESS.items.map((biz, i) => {
+        const c = COLOR[biz.color as Accent];
+        const zebra = i % 2 === 0 ? "bg-warm" : "bg-surface";
+        return (
+          <Fragment key={biz.num}>
+            {/* カード間の縦ダッシュコネクター */}
+            {i > 0 && (
+              <div
+                className={`flex h-12 items-center pl-6 md:h-20 md:pl-[148px] ${zebra}`}
+                aria-hidden="true"
+              >
+                <motion.span
+                  className="block w-px origin-top"
+                  style={{ height: 52, backgroundColor: c }}
+                  {...anim({ scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 0.5 }, {
+                    duration: 0.55,
+                    ease: "easeOut",
+                  })}
+                />
+              </div>
+            )}
+
+            {/* カード本体 */}
+            <div className={`relative overflow-hidden border-t border-line ${zebra}`}>
+              {/* ゴースト番号（大きな透かし） */}
+              <motion.span
+                aria-hidden="true"
+                className="pointer-events-none absolute right-[-20px] bottom-[-40px] select-none font-en font-extrabold leading-none text-[rgba(15,31,61,0.028)]"
+                style={{ fontSize: 300 }}
+                {...anim({ scale: 1.18, opacity: 0 }, { scale: 1, opacity: 1 }, {
+                  duration: 1.2,
+                  ease: EASE,
+                })}
+              >
+                {biz.num}
+              </motion.span>
+
+              {/* タイトルゾーン（上・即座に読める） */}
+              <div className="relative z-10 flex items-end gap-5 border-b border-line px-6 pt-8 pb-7 md:gap-10 md:px-20 md:pt-[52px] md:pb-11">
+                {/* 番号＋アクセントバー */}
+                <div className="flex shrink-0 flex-col pb-1">
+                  <motion.span
+                    className="mb-3 block w-0.5 origin-top"
+                    style={{ height: 28, backgroundColor: c }}
+                    {...anim({ scaleY: 0 }, { scaleY: 1 }, { duration: 0.45 })}
+                  />
+                  <motion.span
+                    className="block font-en text-[2rem] font-bold leading-none md:text-[2.75rem]"
+                    style={{ color: c }}
+                    {...anim({ scale: 1.2, y: 8, opacity: 0 }, { scale: 1, y: 0, opacity: 1 }, {
+                      duration: 0.65,
+                      ease: EASE,
+                      delay: 0.05,
+                    })}
+                  >
+                    {biz.num}
+                  </motion.span>
+                </div>
+
+                {/* タイトル＋ラベル */}
+                <div className="flex-1">
+                  <motion.div
+                    className="mb-3.5 font-en text-[9px] font-semibold uppercase tracking-[0.2em]"
+                    style={{ color: c }}
+                    {...anim({ opacity: 0, y: 6 }, { opacity: 1, y: 0 }, {
+                      duration: 0.45,
+                      delay: 0.04,
+                    })}
+                  >
+                    {biz.en}
+                  </motion.div>
+                  <motion.h3
+                    className="font-ja text-[1.75rem] font-medium leading-[1.3] text-navy md:text-[3.25rem]"
+                    {...anim({ opacity: 0, y: 16 }, { opacity: 1, y: 0 }, {
+                      duration: 0.7,
+                      ease: EASE,
+                      delay: 0.1,
+                    })}
+                  >
+                    {biz.title}
+                  </motion.h3>
+                  <motion.p
+                    className="mt-3 font-ja text-[13.5px] font-light leading-[1.75] text-muted"
+                    {...anim({ opacity: 0 }, { opacity: 1 }, { duration: 0.5, delay: 0.28 })}
+                  >
+                    {biz.tag}
+                  </motion.p>
+                </div>
+              </div>
+
+              {/* 詳細ゾーン（下） */}
+              <div className="relative z-10 px-6 pt-6 pb-10 md:px-20 md:pt-11 md:pb-16">
+                <div className="max-w-[620px]">
+                  <motion.p
+                    className="mb-8 font-ja text-[15.5px] font-light leading-[2.05] text-muted"
+                    {...anim({ opacity: 0, y: 10 }, { opacity: 1, y: 0 }, {
+                      duration: 0.6,
+                      delay: 0.1,
+                    })}
+                  >
+                    {biz.lead}
+                  </motion.p>
+
+                  {/* 取り組み 2列 */}
+                  <div className="mb-9 grid grid-cols-1 gap-x-10 gap-y-3 md:grid-cols-2">
+                    {biz.works.map((item, ii) => (
+                      <motion.div
+                        key={item}
+                        className="flex items-start gap-2.5"
+                        {...anim({ opacity: 0, x: -8 }, { opacity: 1, x: 0 }, {
+                          duration: 0.4,
+                          delay: 0.15 + ii * 0.07,
+                        })}
                       >
                         <span
-                          className="font-en text-[14px] font-semibold md:text-[17px]"
-                          style={{ color: accentVar[accent] }}
-                        >
-                          {biz.num}
+                          className="mt-2 h-[5px] w-[5px] shrink-0 rounded-full"
+                          style={{ backgroundColor: c }}
+                        />
+                        <span className="font-ja text-[13.5px] leading-[1.8] text-navy">
+                          {item}
                         </span>
-                      </span>
-                      <div>
-                        <div
-                          className="mb-1 font-en text-[8px] font-semibold uppercase tracking-[0.18em]"
-                          style={{ color: accentVar[accent] }}
-                        >
-                          {biz.en}
-                        </div>
-                        <h3 className="font-ja text-[15px] font-medium leading-snug text-navy md:text-[18px]">
-                          {biz.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <p className="font-ja text-[13px] leading-[1.9] text-muted">
-                      {biz.lead}
-                    </p>
+                      </motion.div>
+                    ))}
                   </div>
 
-                  {/* 右：取り組みリスト＋CTA */}
-                  <div className="w-full border-line md:flex-1 md:border-l md:pl-12">
-                    <ul className="mb-6 grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2">
-                      {biz.works.map((w) => (
-                        <li key={w} className="flex items-start gap-2.5">
-                          <span
-                            className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full"
-                            style={{ backgroundColor: accentVar[accent] }}
-                          />
-                          <span className="font-ja text-[12px] leading-[1.75] text-navy">
-                            {w}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    <a
-                      href={biz.cta.href}
-                      className="group inline-flex items-center gap-2 border-b pb-0.5 font-ja text-[12px] font-medium transition-opacity hover:opacity-70"
-                      style={{ color: accentVar[accent], borderColor: accentVar[accent] }}
+                  {/* CTA */}
+                  <motion.a
+                    href={biz.cta.href}
+                    className="group inline-flex items-center gap-2 border-b pb-[3px] font-ja text-[13px] font-medium"
+                    style={{ color: c, borderColor: `color-mix(in srgb, ${c} 33%, transparent)` }}
+                    {...anim({ opacity: 0 }, { opacity: 1 }, { duration: 0.5, delay: 0.55 })}
+                  >
+                    {biz.cta.label}
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform duration-200 group-hover:translate-x-1"
                     >
-                      {biz.cta.label}
-                      <span
-                        aria-hidden="true"
-                        className="transition-transform duration-200 group-hover:translate-x-1"
-                      >
-                        →
-                      </span>
-                    </a>
-                  </div>
-                </article>
-              </Reveal>
+                      →
+                    </span>
+                  </motion.a>
+                </div>
+              </div>
+            </div>
+          </Fragment>
+        );
+      })}
 
-              {i < BUSINESS.items.length - 1 && (
-                <Connector
-                  from={accent}
-                  to={BUSINESS.items[i + 1].color as Accent}
-                />
-              )}
-            </Fragment>
-          );
-        })}
-
-        {/* 循環インジケータ */}
-        <div className="flex items-center gap-2 px-5 py-3.5 opacity-45 md:px-12">
-          <div className="flex w-12 shrink-0 justify-center md:w-[60px]">
-            <span className="h-2 w-2 rounded-full border-[1.5px] border-navy" />
-          </div>
-          <svg width="80" height="12" className="block" aria-hidden="true">
-            <path
-              d="M 0 6 Q 40 0 80 6"
-              fill="none"
-              stroke="var(--color-teal)"
-              strokeWidth="1"
-              strokeDasharray="3 4"
-            />
-          </svg>
-          <span className="font-en text-[8px] uppercase tracking-[0.15em] text-teal">
-            循環 / Cycle
-          </span>
-        </div>
-      </div>
-    </Section>
+      <div className="h-px bg-line" />
+    </section>
   );
 }

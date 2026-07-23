@@ -1,80 +1,129 @@
-import { Section } from "@/components/ui/Section";
+"use client";
+
+import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextLink } from "@/components/ui/TextLink";
-import { Reveal } from "@/components/ui/Reveal";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { VISION } from "@/content/home";
 
-const COLOR = {
+type Accent = "teal" | "amber" | "navy";
+const COLOR: Record<Accent, string> = {
   teal: "var(--color-teal)",
   amber: "var(--color-amber)",
   navy: "var(--color-navy)",
-} as const;
+};
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 /**
- * 5つのVision。Figma Make は 600vh のスクロールジャックだが、
- * 「スクロールを奪わない」方針により通常縦スクロールのリストで表示する。
+ * 5つのVision。Figma Make の新デザイン（ロックしないエディトリアル縦リスト）。
+ * 縦のアクセント線がスクロールで伸び、番号は左から・内容は右からスライドインする。
  */
 export function Vision() {
+  const reduced = usePrefersReducedMotion();
+
+  const anim = (
+    initial: Record<string, number | string>,
+    whileInView: Record<string, number | string>,
+    transition: Record<string, unknown>,
+    viewport?: Record<string, unknown>,
+  ) =>
+    reduced
+      ? {}
+      : {
+          initial,
+          whileInView,
+          viewport: { once: true, ...viewport } as const,
+          transition,
+        };
+
   return (
-    <Section id="vision" className="relative overflow-hidden bg-surface">
-      {/* 見出し */}
-      <Reveal className="mb-14 text-center">
-        <div className="flex items-center justify-center gap-2.5">
-          <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
-          <SectionLabel>{VISION.label}</SectionLabel>
-          <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
-        </div>
-        <h2 className="mt-5 font-ja text-[1.5rem] font-medium leading-[1.55] text-navy md:text-[2.25rem]">
+    <section id="vision" className="bg-surface">
+      {/* セクション見出し */}
+      <div className="border-b border-line px-6 pt-16 pb-12 md:px-20 md:pt-24 md:pb-[72px]">
+        <SectionLabel>{VISION.label}</SectionLabel>
+        <motion.h2
+          className="mt-4 font-ja text-[1.75rem] font-light leading-[1.4] text-navy md:text-[2.75rem]"
+          {...anim({ opacity: 0, y: 18 }, { opacity: 1, y: 0 }, { duration: 0.75, ease: EASE })}
+        >
           {VISION.heading}
-        </h2>
-        <p className="mx-auto mt-4 max-w-[560px] font-ja text-body leading-relaxed text-muted">
-          {VISION.intro}
-        </p>
-      </Reveal>
+        </motion.h2>
+      </div>
 
-      {/* 5つの変化のリスト */}
-      <ol className="mx-auto max-w-4xl">
-        {VISION.items.map((v, i) => (
-          <Reveal key={v.num} delay={i * 0.05}>
-            <li className="flex flex-col gap-4 border-t border-line py-8 md:flex-row md:items-baseline md:gap-10 md:py-10">
-              {/* 大きな番号＋色リング */}
-              <div className="flex shrink-0 items-center gap-4 md:w-40">
-                <span
-                  className="font-en text-[3.5rem] font-light leading-none text-navy/10 md:text-[5rem]"
+      {/* 縦線付きのエディトリアル行 */}
+      <div className="relative">
+        {/* 縦アクセント線（スクロールで下へ伸びる） */}
+        <motion.span
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 bottom-0 left-[23px] w-px origin-top bg-teal/20 md:left-[159px]"
+          {...anim({ scaleY: 0 }, { scaleY: 1 }, { duration: 2.4, ease: EASE }, {
+            margin: "-10%",
+          })}
+        />
+
+        <ol>
+          {VISION.items.map((vis) => {
+            const c = COLOR[vis.color as Accent];
+            return (
+              <li
+                key={vis.num}
+                className="relative flex min-h-[220px] items-center border-b border-line px-6 py-14 md:px-20 md:py-20"
+              >
+                {/* 縦線上のドット */}
+                <motion.span
                   aria-hidden="true"
-                >
-                  {v.num}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="hidden h-2.5 w-2.5 rounded-full md:block"
-                  style={{ backgroundColor: COLOR[v.color] }}
+                  className="absolute left-[17px] z-[2] h-[13px] w-[13px] rounded-full border-2 border-surface md:left-[153px]"
+                  style={{ backgroundColor: c }}
+                  {...anim({ scale: 0, opacity: 0 }, { scale: 1, opacity: 1 }, {
+                    duration: 0.35,
+                    delay: 0.15,
+                  })}
                 />
-              </div>
 
-              {/* 内容 */}
-              <div className="md:flex-1">
-                <div
-                  className="mb-2 font-en text-[9px] font-semibold uppercase tracking-[0.18em]"
-                  style={{ color: COLOR[v.color] }}
+                {/* ゴースト番号（左からスライド・PCのみ） */}
+                <motion.span
+                  aria-hidden="true"
+                  className="hidden shrink-0 select-none pl-20 font-en text-[100px] font-extralight leading-none text-navy/[0.07] md:block md:w-[200px]"
+                  {...anim({ x: -36, opacity: 0 }, { x: 0, opacity: 1 }, {
+                    duration: 0.75,
+                    ease: EASE,
+                  }, { margin: "-40px" })}
                 >
-                  {v.en}
-                </div>
-                <h3 className="font-ja text-h3 font-medium text-navy">
-                  {v.title}
-                </h3>
-                <p className="mt-3 max-w-2xl font-ja text-body leading-loose text-muted">
-                  {v.desc}
-                </p>
-              </div>
-            </li>
-          </Reveal>
-        ))}
-      </ol>
+                  {vis.num}
+                </motion.span>
 
-      <Reveal className="mt-12 text-center">
+                {/* 内容（右からフェードイン） */}
+                <motion.div
+                  className="flex-1 pl-8 md:pl-0"
+                  {...anim({ x: 28, opacity: 0 }, { x: 0, opacity: 1 }, {
+                    duration: 0.75,
+                    ease: EASE,
+                    delay: 0.1,
+                  }, { margin: "-40px" })}
+                >
+                  <div
+                    className="mb-3.5 font-en text-[9px] font-semibold uppercase tracking-[0.2em]"
+                    style={{ color: c }}
+                  >
+                    Vision {vis.num} — {vis.en}
+                  </div>
+                  <h3 className="mb-4 font-ja text-[1.25rem] font-medium leading-[1.55] text-navy md:text-[1.875rem]">
+                    {vis.title}
+                  </h3>
+                  <p className="max-w-[580px] font-ja text-[15px] font-light leading-[2.05] text-muted">
+                    {vis.desc}
+                  </p>
+                </motion.div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+
+      {/* CTA */}
+      <div className="px-6 py-12 text-center md:px-20">
         <TextLink href={VISION.cta.href}>{VISION.cta.label}</TextLink>
-      </Reveal>
-    </Section>
+      </div>
+    </section>
   );
 }

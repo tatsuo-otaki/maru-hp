@@ -56,14 +56,13 @@ export const ABOUT = {
 
 export const BUSINESS = {
   label: "Business",
-  headingLines: ["3つの事業をつなぎ、", "幸せに働ける人を増やします。"],
-  intro:
-    "開発、教育、仕事の機会を別々に提供するのではなく、一つの循環としてつなげることが、株式会社〇の特徴です。",
+  heading: "私たちの3つの事業",
   items: [
     {
       num: "01",
       title: "AI・システム開発",
       en: "AI & System Development",
+      tag: "AIと技術で、企業・社会の課題を解決するシステムをつくります",
       color: "teal" as const,
       lead: "AIやデータを活用し、企業や社会が抱える課題を解決するシステムを企画・開発します。",
       works: [
@@ -80,6 +79,7 @@ export const BUSINESS = {
       num: "02",
       title: "AI教育・人材育成",
       en: "AI Education & Training",
+      tag: "AIを実装し、実際の仕事を遂行できる人材を育てます",
       color: "amber" as const,
       lead: "AIを使うだけでなく、AIを実装し、実際の仕事を遂行できる人材を育成します。",
       works: [
@@ -96,6 +96,7 @@ export const BUSINESS = {
       num: "03",
       title: "仕事と社会参加の仕組みづくり",
       en: "Social Participation Design",
+      tag: "学びを仕事へつなぎ、誰もが力を発揮できる環境をつくります",
       color: "navy" as const,
       lead: "教育、企業、地域、就労支援をつなぎ、誰もが学んだ力を仕事として発揮できる仕組みをつくります。",
       works: [
@@ -206,7 +207,7 @@ export const MISSION = {
 
 export const VISION = {
   label: "Vision",
-  heading: "私たちが実現する5つの変化",
+  heading: "〇が変えたい5つの世界",
   intro:
     "株式会社〇は、「働く」「組織」「経済」「教育」「相互理解」の5つの領域から、これからの社会のあり方を変えていきます。",
   cta: { label: "Mission・Visionを詳しく見る", href: "/about" },
