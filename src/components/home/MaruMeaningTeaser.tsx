@@ -36,19 +36,8 @@ export function MaruMeaningTeaser() {
               animate={reduced ? undefined : { rotate: [0, 2, -1, 0] }}
               transition={reduced ? undefined : { duration: 12, repeat: Infinity, ease: "easeInOut" }}
             >
-              <text
-                x={0}
-                y={0}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontFamily="var(--font-ja)"
-                fontSize="100"
-                fontWeight="300"
-                fill="var(--color-navy)"
-                opacity="0.82"
-              >
-                {MARU_MEANING.center}
-              </text>
+              {/* 中央の〇は公式ロゴ画像を使用 */}
+              <image href="/maru-logo.png" x={-46} y={-46} width={92} height={92} />
             </motion.g>
           </g>
           {MARU_MEANING.words.map((w, i) => (
