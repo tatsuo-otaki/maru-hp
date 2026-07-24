@@ -30,9 +30,11 @@ export function MaruMeaning() {
 
           <g transform="translate(180,180)">
             <motion.g
-              animate={reduced ? undefined : { rotate: [0, 2, -1, 0] }}
+              animate={
+                reduced ? undefined : { x: [0, 8, -6, 4, 0], y: [0, -6, 5, -4, 0] }
+              }
               transition={
-                reduced ? undefined : { duration: 12, repeat: Infinity, ease: "easeInOut" }
+                reduced ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }
               }
             >
               {/* 中央の〇は公式ロゴ画像を使用 */}

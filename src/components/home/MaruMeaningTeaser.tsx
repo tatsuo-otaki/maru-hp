@@ -33,8 +33,10 @@ export function MaruMeaningTeaser() {
           <circle cx={180} cy={180} r={152} fill="none" stroke="rgba(45,139,125,0.09)" strokeWidth="1" />
           <g transform="translate(180,180)">
             <motion.g
-              animate={reduced ? undefined : { rotate: [0, 2, -1, 0] }}
-              transition={reduced ? undefined : { duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              animate={
+                reduced ? undefined : { x: [0, 8, -6, 4, 0], y: [0, -6, 5, -4, 0] }
+              }
+              transition={reduced ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }}
             >
               {/* 中央の〇は公式ロゴ画像を使用 */}
               <image href="/maru-logo.png" x={-46} y={-46} width={92} height={92} />
