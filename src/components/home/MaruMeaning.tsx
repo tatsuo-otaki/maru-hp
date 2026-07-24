@@ -12,7 +12,7 @@ export function MaruMeaning() {
   const reduced = usePrefersReducedMotion();
 
   return (
-    <Section id="maru" className="relative overflow-hidden bg-surface">
+    <Section id="maru" className="relative overflow-hidden bg-warm">
       <div className="flex flex-col items-center gap-12 md:flex-row md:gap-20">
         {/* 左：〇と意味語の図 */}
         <motion.svg

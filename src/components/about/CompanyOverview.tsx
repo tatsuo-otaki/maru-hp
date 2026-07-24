@@ -5,7 +5,7 @@ import { COMPANY } from "@/content/company";
 
 export function CompanyOverview() {
   return (
-    <Section id="company" className="bg-surface">
+    <Section id="company" className="bg-warm">
       <Reveal className="mb-10">
         <div className="flex items-center gap-2.5">
           <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
