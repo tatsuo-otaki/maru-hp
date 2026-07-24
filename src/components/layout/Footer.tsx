@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/layout/Logo";
 import { FOOTER_ITEMS, SITE } from "@/lib/site";
 
 export function Footer() {
@@ -8,8 +9,8 @@ export function Footer() {
       <Container className="flex flex-col gap-10 py-14 md:flex-row md:items-start md:justify-between">
         {/* ブランド + Mission */}
         <div className="max-w-sm">
-          <div className="font-ja text-lg font-medium text-navy">
-            株式会社<span className="text-teal">〇</span>
+          <div className="flex items-center">
+            <Logo markSize={20} className="text-lg" />
             <span className="ml-2 font-en text-sm text-muted">/ {SITE.nameEn}</span>
           </div>
           <p className="mt-4 font-ja text-h3 font-medium leading-relaxed text-navy">

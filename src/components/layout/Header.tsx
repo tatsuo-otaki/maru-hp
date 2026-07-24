@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/layout/Logo";
 import { NAV_ITEMS, SITE } from "@/lib/site";
 
 const links = NAV_ITEMS.filter((item) => item.href !== "/contact");
@@ -30,12 +31,8 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-line bg-warm/90 backdrop-blur-sm">
       <Container className="flex h-16 items-center justify-between">
         {/* ロゴ / 社名 */}
-        <Link
-          href="/"
-          className="font-ja text-lg font-medium tracking-wide text-navy"
-          aria-label={`${SITE.name} ホームへ`}
-        >
-          株式会社<span className="text-teal">〇</span>
+        <Link href="/" aria-label={`${SITE.name} ホームへ`}>
+          <Logo markSize={20} className="text-lg" />
         </Link>
 
         {/* Desktop ナビ */}
