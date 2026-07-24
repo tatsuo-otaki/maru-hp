@@ -10,7 +10,7 @@ export function Footer() {
         {/* ブランド + Mission */}
         <div className="max-w-sm">
           <div className="flex items-center">
-            <Logo markSize={20} className="text-lg" />
+            <Logo className="text-lg" />
             <span className="ml-2 font-en text-sm text-muted">/ {SITE.nameEn}</span>
           </div>
           <p className="mt-4 font-ja text-h3 font-medium leading-relaxed text-navy">

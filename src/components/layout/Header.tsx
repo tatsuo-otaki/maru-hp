@@ -32,7 +32,7 @@ export function Header() {
       <Container className="flex h-16 items-center justify-between">
         {/* ロゴ / 社名 */}
         <Link href="/" aria-label={`${SITE.name} ホームへ`}>
-          <Logo markSize={20} className="text-lg" />
+          <Logo className="text-lg" />
         </Link>
 
         {/* Desktop ナビ */}
