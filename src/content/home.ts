@@ -60,6 +60,7 @@ export const BUSINESS = {
   items: [
     {
       num: "01",
+      slug: "ai-development",
       title: "AI・システム開発",
       en: "AI & System Development",
       tag: "AIと技術で、企業・社会の課題を解決するシステムをつくります",
@@ -73,10 +74,17 @@ export const BUSINESS = {
         "AI導入の企画・実証実験",
         "既存業務やサービスへのAI組み込み",
       ],
+      roles: [
+        "企業や社会から実際の課題を受け、技術力で解決する",
+        "教育で育成した人材が参加できる仕事を生み出す",
+        "現場で必要な技術やスキルを教育へ還元する",
+        "実務経験者が品質を担保する",
+      ],
       cta: { label: "AI・システム開発について", href: "/business#ai-development" },
     },
     {
       num: "02",
+      slug: "ai-education",
       title: "AI教育・人材育成",
       en: "AI Education & Training",
       tag: "AIを実装し、実際の仕事を遂行できる人材を育てます",
@@ -90,10 +98,17 @@ export const BUSINESS = {
         "企業向けAI・DX人材育成",
         "学生・社会人・海外向けの教育",
       ],
+      roles: [
+        "高度なAI人材を育成し、教育格差を縮小する",
+        "場所や環境に左右されず学べる機会を提供する",
+        "企業や社会が必要とする人材を育成する",
+        "教育から実務への接続を可能にする",
+      ],
       cta: { label: "AI教育・人材育成について", href: "/business#ai-education" },
     },
     {
       num: "03",
+      slug: "social",
       title: "仕事と社会参加の仕組みづくり",
       en: "Social Participation Design",
       tag: "学びを仕事へつなぎ、誰もが力を発揮できる環境をつくります",
@@ -106,6 +121,12 @@ export const BUSINESS = {
         "通勤が難しい人へのリモートワーク機会の提供",
         "就労継続支援A型・B型事業所との連携",
         "講師・高度人材による品質管理",
+      ],
+      roles: [
+        "「学んだが仕事がない」という問題を減らす",
+        "地方や就労に制約がある人にも高度な仕事を届ける",
+        "企業の社会貢献と事業活動の両立を実現する",
+        "教育・就労・企業・地域を循環させる",
       ],
       cta: { label: "連携・協業について相談する", href: "/contact" },
     },
