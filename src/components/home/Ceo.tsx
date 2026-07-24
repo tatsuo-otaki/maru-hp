@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,14 +14,22 @@ export function Ceo() {
       />
 
       <div className="flex flex-col items-center gap-12 md:flex-row md:items-start md:gap-16">
-        {/* 左：円形写真プレースホルダ */}
+        {/* 左：円形の代表写真 */}
         <Reveal className="shrink-0">
-          <div className="relative flex h-[220px] w-[220px] items-center justify-center rounded-full border-[1.5px] border-teal/30 bg-warm">
+          <div className="relative">
             <span
               aria-hidden="true"
               className="absolute -inset-2 rounded-full border border-teal/[0.18]"
             />
-            <span className="font-ja text-[40px] text-muted/30">{CEO.photoMark}</span>
+            <div className="relative h-[220px] w-[220px] overflow-hidden rounded-full border-[1.5px] border-teal/30">
+              <Image
+                src={CEO.photo.src}
+                alt={CEO.photo.alt}
+                fill
+                sizes="220px"
+                className="object-cover"
+              />
+            </div>
           </div>
         </Reveal>
 
@@ -51,6 +60,36 @@ export function Ceo() {
             <div className="font-ja text-[13px] font-medium text-navy">{CEO.name}</div>
             <div className="mt-1 font-en text-[9px] font-semibold uppercase tracking-[0.15em] text-muted">
               {CEO.role}
+            </div>
+          </div>
+
+          {/* プロフィール（経歴） */}
+          <div className="mt-10">
+            <h3 className="mb-4 flex items-center gap-2 font-en text-[9px] font-semibold uppercase tracking-[0.2em] text-teal">
+              <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
+              Profile
+            </h3>
+            <p className="font-ja text-[13px] font-light leading-loose text-muted">
+              {CEO.profile.bio}
+            </p>
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {CEO.profile.groups.map((group) => (
+                <div key={group.heading}>
+                  <div className="mb-3 font-ja text-[12px] font-medium text-navy">
+                    {group.heading}
+                  </div>
+                  <ul className="space-y-2">
+                    {group.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-teal" />
+                        <span className="font-ja text-[12px] leading-relaxed text-muted">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </Reveal>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextLink } from "@/components/ui/TextLink";
@@ -12,14 +13,22 @@ export function CeoTeaser() {
   return (
     <Section id="ceo-teaser" className="relative overflow-hidden">
       <div className="flex flex-col items-center gap-12 md:flex-row md:items-center md:gap-16">
-        {/* 円形写真プレースホルダ */}
+        {/* 円形の代表写真 */}
         <Reveal className="shrink-0">
-          <div className="relative flex h-[180px] w-[180px] items-center justify-center rounded-full border-[1.5px] border-teal/30 bg-warm md:h-[220px] md:w-[220px]">
+          <div className="relative">
             <span
               aria-hidden="true"
               className="absolute -inset-2 rounded-full border border-teal/[0.18]"
             />
-            <span className="font-ja text-[40px] text-muted/30">{CEO.photoMark}</span>
+            <div className="relative h-[180px] w-[180px] overflow-hidden rounded-full border-[1.5px] border-teal/30 md:h-[220px] md:w-[220px]">
+              <Image
+                src={CEO.photo.src}
+                alt={CEO.photo.alt}
+                fill
+                sizes="(max-width: 768px) 180px, 220px"
+                className="object-cover"
+              />
+            </div>
           </div>
         </Reveal>
 
