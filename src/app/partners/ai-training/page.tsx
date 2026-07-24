@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
-import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
 import { Faq } from "@/components/ui/Faq";
+import { SectionHead as Head } from "@/components/partners/SectionHead";
 import { ContactCta } from "@/components/home/ContactCta";
 import { AI_TRAINING as C } from "@/content/partnerAiTraining";
 
@@ -19,26 +19,6 @@ export const metadata: Metadata = {
   description:
     "AIを学びたい人と、育成・採用・DXを進めたい企業をつなぐ実践型プログラム。企業の実際の課題を教材に、学びながら働く仕組みで、教育を実務と仕事へつなげます。",
 };
-
-/** 見出し（ラベル＋タイトル＋任意のリード） */
-function Head({ label, title, intro }: { label: string; title: string; intro?: string }) {
-  return (
-    <Reveal className="mb-10">
-      <div className="flex items-center gap-2.5">
-        <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
-        <SectionLabel>{label}</SectionLabel>
-      </div>
-      <h2 className="mt-4 font-ja text-[1.5rem] font-medium text-navy md:text-[2rem]">
-        {title}
-      </h2>
-      {intro && (
-        <p className="mt-4 max-w-2xl font-ja text-body leading-relaxed text-muted">
-          {intro}
-        </p>
-      )}
-    </Reveal>
-  );
-}
 
 export default function AiTrainingPage() {
   return (
