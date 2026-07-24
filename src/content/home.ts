@@ -266,7 +266,7 @@ export const MARU_MEANING = {
     { word: "調和", x: 308, y: 254, size: 15 },
     { word: "肯定", x: 180, y: 330, size: 14 },
     { word: "多様性", x: 52, y: 254, size: 14 },
-    { word: "ご縁", x: 52, y: 106, size: 14 },
+    { word: "堅牢性", x: 52, y: 106, size: 14 },
   ],
 } as const;
 

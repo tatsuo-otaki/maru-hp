@@ -27,7 +27,7 @@ export function MaruMeaningTeaser() {
           viewport={{ once: true }}
           transition={reduced ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           role="img"
-          aria-label="〇に込めた意味：つながり、循環、調和、肯定、多様性、ご縁"
+          aria-label="〇に込めた意味：つながり、循環、調和、肯定、多様性、堅牢性"
         >
           <circle cx={180} cy={180} r={174} fill="none" stroke="rgba(45,139,125,0.22)" strokeWidth="1.5" />
           <circle cx={180} cy={180} r={152} fill="none" stroke="rgba(45,139,125,0.09)" strokeWidth="1" />
