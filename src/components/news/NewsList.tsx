@@ -71,43 +71,56 @@ export function NewsList() {
       <ul className="border-t border-line">
         {items.map((item) => {
           const c = COLOR[NEWS_CATEGORY_COLOR[item.category]];
-          return (
-            <li key={item.title}>
-              <a
-                href={item.href}
-                {...(item.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="group flex flex-col gap-2 border-b border-line py-5 transition-colors hover:bg-navy/[0.02] md:flex-row md:items-center md:gap-5"
-              >
-                <div className="flex shrink-0 items-center gap-3 md:w-56">
-                  <span
-                    className="rounded-[10px] px-2.5 py-1 font-ja text-[9px] font-semibold"
-                    style={{ color: c, backgroundColor: tint(c, 10) }}
-                  >
-                    {item.category}
-                  </span>
-                  {(item.year || item.outlet) && (
-                    <span className="font-en text-[11px] tracking-wide text-muted">
-                      {item.year ?? item.outlet}
-                    </span>
-                  )}
-                </div>
-                <span className="font-ja text-[13px] leading-[1.6] text-navy">
-                  {item.title}
-                  {item.year && item.outlet && (
-                    <span className="ml-2 font-ja text-[11px] text-muted">
-                      — {item.outlet}
-                    </span>
-                  )}
+          const rowClass =
+            "group flex flex-col gap-2 border-b border-line py-5 md:flex-row md:items-center md:gap-5";
+          const inner = (
+            <>
+              <div className="flex shrink-0 items-center gap-3 md:w-56">
+                <span
+                  className="rounded-[10px] px-2.5 py-1 font-ja text-[9px] font-semibold"
+                  style={{ color: c, backgroundColor: tint(c, 10) }}
+                >
+                  {item.category}
                 </span>
+                {(item.year || item.outlet) && (
+                  <span className="font-en text-[11px] tracking-wide text-muted">
+                    {item.year ?? item.outlet}
+                  </span>
+                )}
+              </div>
+              <span className="font-ja text-[13px] leading-[1.6] text-navy">
+                {item.title}
+                {item.year && item.outlet && (
+                  <span className="ml-2 font-ja text-[11px] text-muted">
+                    — {item.outlet}
+                  </span>
+                )}
+              </span>
+              {item.href && (
                 <span
                   aria-hidden="true"
                   className="ml-auto hidden shrink-0 font-en text-[12px] text-muted transition-transform duration-200 group-hover:translate-x-0.5 md:inline"
                 >
                   {item.external ? "↗" : "→"}
                 </span>
-              </a>
+              )}
+            </>
+          );
+          return (
+            <li key={item.title}>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className={`${rowClass} transition-colors hover:bg-navy/[0.02]`}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div className={rowClass}>{inner}</div>
+              )}
             </li>
           );
         })}

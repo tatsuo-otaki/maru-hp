@@ -26,7 +26,8 @@ export type NewsItem = {
   outlet?: string;
   /** 年（判明分のみ） */
   year?: string;
-  href: string;
+  /** リンク先（無い場合は非リンク表示） */
+  href?: string;
   /** 外部リンク（別タブ） */
   external?: boolean;
 };
@@ -41,6 +42,11 @@ export const NEWS_PAGE = {
   mediaNote:
     "取材、インタビュー、講演、寄稿、番組出演などのご相談は、お問い合わせよりお気軽にご連絡ください。",
   items: [
+    {
+      category: "メディア掲載",
+      title: "NHK「凄ワザ！夢かなえますSP」に開発リーダーとして出演しました",
+      outlet: "NHK",
+    },
     {
       category: "メディア掲載",
       title: "クリエイターズステーション「風雲会社伝」にインタビューが掲載されました",
