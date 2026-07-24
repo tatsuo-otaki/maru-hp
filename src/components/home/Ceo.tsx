@@ -37,9 +37,16 @@ export function Ceo() {
               </span>
             ))}
           </h2>
-          <p className="mt-6 font-ja text-body font-light leading-loose text-muted">
-            {CEO.body}
-          </p>
+          <div className="mt-6 space-y-5">
+            {CEO.body.map((para) => (
+              <p
+                key={para}
+                className="font-ja text-body font-light leading-loose text-muted"
+              >
+                {para}
+              </p>
+            ))}
+          </div>
           <div className="mt-9 border-t border-line pt-5">
             <div className="font-ja text-[13px] font-medium text-navy">{CEO.name}</div>
             <div className="mt-1 font-en text-[9px] font-semibold uppercase tracking-[0.15em] text-muted">
