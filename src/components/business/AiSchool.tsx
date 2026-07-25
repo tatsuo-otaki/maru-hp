@@ -7,11 +7,18 @@ const { school } = BUSINESS_PAGE;
 
 export function AiSchool() {
   return (
-    <Section id="ai-school" className="relative overflow-hidden bg-surface">
-      {/* 背景の薄い〇 */}
+    <Section
+      id="ai-school"
+      className="relative overflow-hidden border-y border-teal/20 bg-[color-mix(in_srgb,var(--color-teal)_9%,var(--color-warm))]"
+    >
+      {/* 背景の薄い〇（ティール地で少し強めに） */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 right-[-180px] h-[520px] w-[520px] -translate-y-1/2 rounded-full border border-[rgba(45,139,125,0.06)]"
+        className="pointer-events-none absolute top-1/2 right-[-180px] h-[520px] w-[520px] -translate-y-1/2 rounded-full border border-teal/15"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/2 right-[-100px] h-[360px] w-[360px] -translate-y-1/2 rounded-full border border-teal/10"
       />
       <Reveal className="relative max-w-2xl">
         <div className="flex items-center gap-2.5">
