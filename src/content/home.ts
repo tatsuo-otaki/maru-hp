@@ -216,6 +216,13 @@ export const PROJECTS = {
       desc: "防犯カメラ映像を Jetson 上で解析。YOLO＋VLM の二段構成で高精度・軽量に。",
       feature: false,
     },
+    {
+      cat: "AI教育",
+      color: "navy" as const,
+      title: "海外大学院生へのAI講義",
+      desc: "海外の大学院と連携し、メタバースを活用してAI・機械学習の実践的な講義を提供。",
+      feature: false,
+    },
   ],
 } as const;
 
@@ -366,31 +373,8 @@ export const NEWS = {
   label: "News & Press",
   heading: "News & Press",
   intro:
-    "株式会社〇からのお知らせ、プロジェクト、イベント、メディア掲載、プレスリリースをご紹介します。",
-  categories: ["お知らせ", "プレスリリース", "プロジェクト", "イベント・登壇", "メディア掲載"],
-  items: [
-    {
-      date: "2025.06.20",
-      cat: "プロジェクト",
-      color: "teal" as const,
-      title: "メタバース情報工学学校との教育プログラムを開始しました",
-      href: "/news",
-    },
-    {
-      date: "2025.05.14",
-      cat: "イベント・登壇",
-      color: "amber" as const,
-      title: "AI教育フォーラム2025に登壇します",
-      href: "/news",
-    },
-    {
-      date: "2025.04.03",
-      cat: "プレスリリース",
-      color: "navy" as const,
-      title: "株式会社〇、海外大学とのAI教育連携協定を締結",
-      href: "/news",
-    },
-  ],
+    "株式会社〇および代表のメディア掲載、イベント登壇、プロジェクトなどをご紹介します。",
+  // 一覧の記事データは content/news.ts（NEWS_PAGE）に集約。トップはその先頭数件を表示。
   ctas: [
     { label: "ニュース一覧を見る", href: "/news", primary: true },
     { label: "報道・メディア関係者の方へ", href: "/contact", primary: false },

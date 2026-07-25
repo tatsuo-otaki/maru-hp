@@ -68,22 +68,58 @@ export default function PartnersPage() {
                   className="group flex h-full flex-col rounded-card border border-line bg-white p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[color:var(--hover)] hover:shadow-[0_10px_28px_rgba(15,31,61,0.09)]"
                   style={{ ["--hover" as string]: c }}
                 >
+                  {/* 対象（誰向けか一目で） */}
                   <span
-                    className="mb-4 h-1.5 w-10 rounded-full"
-                    style={{ backgroundColor: c }}
-                  />
-                  <div
-                    className="mb-2 font-en text-[9px] font-semibold uppercase tracking-[0.18em]"
-                    style={{ color: c }}
+                    className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 font-ja text-[11px] font-medium"
+                    style={{ color: c, backgroundColor: `color-mix(in srgb, ${c} 10%, white)` }}
                   >
-                    {prog.en}
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full"
+                      style={{ backgroundColor: c }}
+                    />
+                    {prog.forWhom}
+                  </span>
+
+                  {/* 引きのコピー（ぱっと見の価値） */}
+                  <p className="font-ja text-[17px] font-medium leading-[1.55] text-navy">
+                    {prog.catch}
+                  </p>
+
+                  {/* プログラム名＋英字ラベル */}
+                  <div className="mt-3 border-t border-line pt-3">
+                    <div
+                      className="font-en text-[9px] font-semibold uppercase tracking-[0.18em]"
+                      style={{ color: c }}
+                    >
+                      {prog.en}
+                    </div>
+                    <h3 className="mt-1 font-ja text-[13.5px] font-medium leading-[1.5] text-navy">
+                      {prog.title}
+                    </h3>
                   </div>
-                  <h3 className="font-ja text-[17px] font-medium leading-[1.5] text-navy">
-                    {prog.title}
-                  </h3>
-                  <p className="mt-3 font-ja text-[13px] leading-[1.85] text-muted">
+
+                  <p className="mt-3 font-ja text-[12.5px] leading-[1.85] text-muted">
                     {prog.desc}
                   </p>
+
+                  {/* 要点（3つの価値） */}
+                  <ul className="mt-4 space-y-1.5">
+                    {prog.points.map((pt) => (
+                      <li
+                        key={pt}
+                        className="flex items-start gap-2 font-ja text-[12px] leading-[1.6] text-navy"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-[6px] h-1 w-1 shrink-0 rounded-full"
+                          style={{ backgroundColor: c }}
+                        />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+
                   <span
                     className="mt-auto inline-flex items-center gap-1.5 pt-5 font-ja text-[12px] font-medium"
                     style={{ color: c }}

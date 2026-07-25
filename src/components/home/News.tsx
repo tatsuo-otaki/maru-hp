@@ -1,12 +1,9 @@
-"use client";
-
-import { useState } from "react";
-import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextLink } from "@/components/ui/TextLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { NEWS } from "@/content/home";
+import { NEWS_PAGE, NEWS_CATEGORY_COLOR } from "@/content/news";
 
 const COLOR = {
   teal: "var(--color-teal)",
@@ -18,12 +15,10 @@ function tint(color: string, pct: number) {
   return `color-mix(in srgb, ${color} ${pct}%, white)`;
 }
 
-export function News() {
-  const [active, setActive] = useState<string | null>(null);
-  const items = active
-    ? NEWS.items.filter((n) => n.cat === active)
-    : NEWS.items;
+// トップでは実データ（/news）の先頭5件を表示（一覧と同期）
+const latest = NEWS_PAGE.items.slice(0, 5);
 
+export function News() {
   return (
     <Section id="news">
       <Reveal className="mb-12">
@@ -40,62 +35,63 @@ export function News() {
         </p>
       </Reveal>
 
-      {/* カテゴリチップ（絞り込み） */}
-      <div className="mb-8 flex flex-wrap gap-2">
-        {NEWS.categories.map((cat) => {
-          const on = active === cat;
+      {/* ニュース一覧（/news と同一データ・同一表示） */}
+      <ul className="border-t border-line">
+        {latest.map((item) => {
+          const c = COLOR[NEWS_CATEGORY_COLOR[item.category]];
+          const rowClass =
+            "group flex flex-col gap-2 border-b border-line py-5 md:flex-row md:items-center md:gap-5";
+          const inner = (
+            <>
+              <div className="flex shrink-0 items-center gap-3 md:w-56">
+                <span
+                  className="rounded-[10px] px-2.5 py-1 font-ja text-[9px] font-semibold"
+                  style={{ color: c, backgroundColor: tint(c, 10) }}
+                >
+                  {item.category}
+                </span>
+                {(item.year || item.outlet) && (
+                  <span className="font-en text-[11px] tracking-wide text-muted">
+                    {item.year ?? item.outlet}
+                  </span>
+                )}
+              </div>
+              <span className="font-ja text-[13px] leading-[1.6] text-navy">
+                {item.title}
+                {item.year && item.outlet && (
+                  <span className="ml-2 font-ja text-[11px] text-muted">
+                    — {item.outlet}
+                  </span>
+                )}
+              </span>
+              {item.href && (
+                <span
+                  aria-hidden="true"
+                  className="ml-auto hidden shrink-0 font-en text-[12px] text-muted transition-transform duration-200 group-hover:translate-x-0.5 md:inline"
+                >
+                  {item.external ? "↗" : "→"}
+                </span>
+              )}
+            </>
+          );
           return (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setActive(on ? null : cat)}
-              aria-pressed={on}
-              className={`rounded-full border px-3.5 py-1.5 font-ja text-[11px] transition-colors ${
-                on
-                  ? "border-teal bg-teal text-white"
-                  : "border-line text-muted hover:text-navy"
-              }`}
-            >
-              {cat}
-            </button>
+            <li key={item.title}>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className={`${rowClass} transition-colors hover:bg-navy/[0.02]`}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div className={rowClass}>{inner}</div>
+              )}
+            </li>
           );
         })}
-      </div>
-
-      {/* ニュース一覧 */}
-      <ul>
-        {items.map((item) => (
-          <li key={item.title}>
-            <Link
-              href={item.href}
-              className="group flex items-center gap-4 border-b border-line py-5 transition-colors hover:bg-navy/[0.02] md:gap-5"
-            >
-              <span className="shrink-0 font-en text-[11px] tracking-wide text-muted">
-                {item.date}
-              </span>
-              <span
-                className="shrink-0 rounded-[10px] px-2.5 py-1 font-ja text-[9px] font-semibold"
-                style={{ color: COLOR[item.color], backgroundColor: tint(COLOR[item.color], 10) }}
-              >
-                {item.cat}
-              </span>
-              <span className="font-ja text-[13px] leading-[1.5] text-navy">
-                {item.title}
-              </span>
-              <span
-                aria-hidden="true"
-                className="ml-auto shrink-0 font-en text-[12px] text-muted transition-transform duration-200 group-hover:translate-x-1"
-              >
-                →
-              </span>
-            </Link>
-          </li>
-        ))}
-        {items.length === 0 && (
-          <li className="py-8 text-center font-ja text-[13px] text-muted">
-            該当するニュースはありません。
-          </li>
-        )}
       </ul>
 
       <div className="mt-7 flex flex-wrap gap-6">

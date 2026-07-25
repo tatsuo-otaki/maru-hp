@@ -6,11 +6,18 @@ import { PARTNER } from "@/content/home";
 
 export function Partner() {
   return (
-    <Section id="partner" className="relative overflow-hidden bg-surface">
-      {/* 背景の薄い〇 */}
+    <Section
+      id="partner"
+      className="relative overflow-hidden border-y border-teal/20 bg-[color-mix(in_srgb,var(--color-teal)_9%,var(--color-warm))]"
+    >
+      {/* 背景の〇（ティール地で少し強めに） */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 right-[-200px] h-[600px] w-[600px] -translate-y-1/2 rounded-full border border-[rgba(15,31,61,0.04)]"
+        className="pointer-events-none absolute top-1/2 right-[-200px] h-[600px] w-[600px] -translate-y-1/2 rounded-full border border-teal/15"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/2 right-[-120px] h-[420px] w-[420px] -translate-y-1/2 rounded-full border border-teal/10"
       />
 
       <Reveal className="relative mb-10 md:mb-12">
