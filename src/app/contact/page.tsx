@@ -27,10 +27,11 @@ export default function ContactPage() {
         <div className="mx-auto max-w-2xl">
           <ContactForm />
 
-          {/* メディア向け補助文 */}
-          <p className="mt-8 rounded-card border border-line bg-surface px-5 py-4 font-ja text-[12.5px] leading-relaxed text-muted">
-            {CONTACT.mediaNote}
-          </p>
+          {/* メディア向け・営業に関する補助文 */}
+          <div className="mt-8 space-y-2 rounded-card border border-line bg-surface px-5 py-4 font-ja text-[12.5px] leading-relaxed text-muted">
+            <p>{CONTACT.mediaNote}</p>
+            <p>{CONTACT.salesNote}</p>
+          </div>
         </div>
       </Section>
     </>

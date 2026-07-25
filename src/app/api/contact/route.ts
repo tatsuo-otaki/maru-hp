@@ -95,6 +95,17 @@ export async function POST(req: Request) {
 
   const company = (body.company ?? "").trim();
   const phone = (body.phone ?? "").trim();
+
+  // 営業・売り込みの可能性を簡易判定し、通知メールの件名にタグを付ける（受信は止めない）
+  const SALES_KEYWORDS = [
+    "営業", "売り込み", "セールス", "ご案内", "掲載しません", "被リンク", "SEO対策",
+    "格安", "無料でお試し", "アポイント", "商談", "資料をお送り", "代理店", "副業",
+    "投資", "融資", "集客", "月額", "成果報酬", "リスト販売", "テレアポ",
+  ];
+  const haystack = `${message} ${company}`;
+  const looksLikeSales = SALES_KEYWORDS.some((k) => haystack.includes(k));
+  const subject = `${looksLikeSales ? "[営業の可能性] " : ""}【お問い合わせ】${type} - ${name}`;
+
   const text = [
     "Webサイトのお問い合わせフォームから送信がありました。",
     "",
@@ -116,7 +127,7 @@ export async function POST(req: Request) {
       from,
       to,
       replyTo: email,
-      subject: `【お問い合わせ】${type} - ${name}`,
+      subject,
       text,
     });
     if (error) {

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HashScroll } from "@/components/layout/HashScroll";
+import { SITE, getSiteUrl } from "@/lib/site";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -19,13 +20,36 @@ const inter = Inter({
   display: "swap",
 });
 
+const description =
+  "株式会社〇（maru Inc.）は、AI・システム開発、AI教育・人材育成、仕事と社会参加の仕組みづくりを通じて、誰もが自分らしく幸せに働ける社会をつくります。";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "株式会社〇 | 幸せに働ける人を世界中に増やす。",
-    template: "%s | 株式会社〇",
+    default: `${SITE.name} | ${SITE.mission}`,
+    template: `%s | ${SITE.name}`,
   },
-  description:
-    "株式会社〇（maru Inc.）は、AI・システム開発、AI教育・人材育成、仕事と社会参加の仕組みづくりを通じて、誰もが自分らしく幸せに働ける社会をつくります。",
+  description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE.name,
+    locale: "ja_JP",
+    url: "/",
+    title: `${SITE.name} | ${SITE.mission}`,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} | ${SITE.mission}`,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

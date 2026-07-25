@@ -8,6 +8,20 @@ export const SITE = {
   schoolUrl: "https://mcie.jp/",
 } as const;
 
+/**
+ * サイトの公開 URL（末尾スラッシュなし）。
+ * 優先順位：NEXT_PUBLIC_SITE_URL（独自ドメイン設定用）
+ *   → Vercel 本番ドメイン（自動）→ ローカル。
+ * OGP / sitemap / canonical の絶対 URL に使う。
+ */
+export function getSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/$/, "");
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercel) return `https://${vercel}`;
+  return "http://localhost:3000";
+}
+
 export type NavItem = {
   label: string;
   href: string;
