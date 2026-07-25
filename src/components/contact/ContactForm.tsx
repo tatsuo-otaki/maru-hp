@@ -14,6 +14,8 @@ type Fields = {
   consent: boolean;
 };
 
+type Status = "idle" | "sending" | "error";
+
 type Errors = Partial<Record<keyof Fields, string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,13 +48,16 @@ export function ContactForm() {
   const [fields, setFields] = useState<Fields>(initial);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [website, setWebsite] = useState(""); // ハニーポット
 
   function update<K extends keyof Fields>(key: K, value: Fields[K]) {
     setFields((f) => ({ ...f, [key]: value }));
   }
 
-  function onSubmit(ev: FormEvent) {
+  async function onSubmit(ev: FormEvent) {
     ev.preventDefault();
+    if (status === "sending") return;
     const e = validate(fields);
     setErrors(e);
     if (Object.keys(e).length > 0) {
@@ -61,8 +66,18 @@ export function ContactForm() {
       first?.focus();
       return;
     }
-    // TODO: 実送信（メール/API）は後日接続。現状は成功画面のみ表示。
-    setSubmitted(true);
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...fields, website }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setSubmitted(true);
+    } catch {
+      setStatus("error");
+    }
   }
 
   if (submitted) {
@@ -92,6 +107,19 @@ export function ContactForm() {
 
   return (
     <form noValidate onSubmit={onSubmit} className="space-y-6">
+      {/* ハニーポット（スクリーンリーダー・視覚から隠す。ボットのみ入力） */}
+      <div aria-hidden="true" className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
+
       {/* 氏名 */}
       <div>
         <label htmlFor="name" className="mb-1.5 block font-ja text-[13px] font-medium text-navy">
@@ -225,11 +253,18 @@ export function ContactForm() {
         {err("consent")}
       </div>
 
+      {status === "error" && (
+        <p role="alert" className="rounded-btn border border-amber/50 bg-amber/5 px-4 py-3 font-ja text-[13px] text-navy">
+          送信に失敗しました。時間をおいて再度お試しください。何度も失敗する場合は、お手数ですが別の方法でご連絡ください。
+        </p>
+      )}
+
       <button
         type="submit"
-        className="rounded-btn bg-navy px-8 py-3.5 font-ja text-[13px] font-medium text-white transition-colors hover:bg-teal"
+        disabled={status === "sending"}
+        className="rounded-btn bg-navy px-8 py-3.5 font-ja text-[13px] font-medium text-white transition-colors hover:bg-teal disabled:cursor-not-allowed disabled:opacity-60"
       >
-        この内容で送信する
+        {status === "sending" ? "送信中…" : "この内容で送信する"}
       </button>
     </form>
   );
