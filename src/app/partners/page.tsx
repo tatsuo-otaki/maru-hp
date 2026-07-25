@@ -46,8 +46,8 @@ export default function PartnersPage() {
       {/* 3つのプログラム（全幅バンド） */}
       <ProgramBands />
 
-      {/* 連携パートナー募集 */}
-      <Section>
+      {/* 連携パートナー募集（プログラムのバンドと区別するため面と区切り線を変える） */}
+      <Section className="border-t border-line bg-surface">
         <Reveal className="mb-10">
           <div className="flex items-center gap-2.5">
             <span aria-hidden="true" className="h-px w-[18px] bg-teal" />
