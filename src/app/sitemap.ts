@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/partners/ai-training",
     "/partners/co-creation",
     "/partners/csr",
-    "/projects",
     "/news",
     "/contact",
     "/privacy",

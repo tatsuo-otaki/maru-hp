@@ -186,7 +186,7 @@ export const PROJECTS = {
   heading: "理想を、実際の活動へ。",
   intro:
     "株式会社〇は、国内外の企業、教育機関、学生、技術者と連携しながら、AI開発と教育の実践を重ねています。",
-  cta: { label: "プロジェクト・実績を見る", href: "/projects" },
+  cta: { label: "プロジェクト・実績を見る", href: "/business#projects" },
   items: [
     {
       cat: "AI教育",

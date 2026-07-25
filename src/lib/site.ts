@@ -38,7 +38,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "事業内容", href: "/business" },
   { label: "AI・しごと学校", href: SITE.schoolUrl, external: true },
   { label: "企業・自治体の方へ", href: "/partners" },
-  { label: "プロジェクト・実績", href: "/projects" },
   { label: "お問い合わせ", href: "/contact" },
 ];
 
@@ -48,7 +47,6 @@ export const FOOTER_ITEMS: NavItem[] = [
   { label: "事業内容", href: "/business" },
   { label: "AI・しごと学校", href: SITE.schoolUrl, external: true },
   { label: "企業・自治体の方へ", href: "/partners" },
-  { label: "プロジェクト・実績", href: "/projects" },
   { label: "ニュース・プレス", href: "/news" },
   { label: "お問い合わせ", href: "/contact" },
   { label: "プライバシーポリシー", href: "/privacy" },
