@@ -22,7 +22,35 @@ type Payload = {
   consent?: boolean;
   // ハニーポット（人間は入力しない。埋まっていたらスパムとみなす）
   website?: string;
+  // Cloudflare Turnstile のトークン
+  turnstileToken?: string;
 };
+
+/**
+ * Cloudflare Turnstile のトークンを検証する。
+ * TURNSTILE_SECRET_KEY が未設定なら検証をスキップ（開発時など）。
+ * 戻り値：true = 通過（または検証スキップ）、false = 検証失敗。
+ */
+async function verifyTurnstile(token: string | undefined): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true; // キー未設定時は検証しない
+  if (!token) return false;
+  try {
+    const res = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ secret, response: token }),
+      },
+    );
+    const data = (await res.json()) as { success?: boolean };
+    return data.success === true;
+  } catch (e) {
+    console.error("Turnstile verify failed:", e);
+    return false;
+  }
+}
 
 export async function POST(req: Request) {
   let body: Payload;
@@ -44,6 +72,14 @@ export async function POST(req: Request) {
   const message = (body.message ?? "").trim();
   if (!name || !email || !type || !message || !EMAIL_RE.test(email) || body.consent !== true) {
     return NextResponse.json({ error: "入力内容をご確認ください。" }, { status: 422 });
+  }
+
+  // CAPTCHA（Cloudflare Turnstile）検証
+  if (!(await verifyTurnstile(body.turnstileToken))) {
+    return NextResponse.json(
+      { error: "認証に失敗しました。ページを再読み込みして再度お試しください。" },
+      { status: 422 },
+    );
   }
 
   const apiKey = process.env.RESEND_API_KEY;

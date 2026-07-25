@@ -1,8 +1,28 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CONTACT } from "@/content/contact";
+
+// Cloudflare Turnstile のグローバル型
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        el: HTMLElement,
+        opts: {
+          sitekey: string;
+          callback: (token: string) => void;
+          "expired-callback"?: () => void;
+          "error-callback"?: () => void;
+        },
+      ) => string;
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 type Fields = {
   name: string;
@@ -50,6 +70,52 @@ export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [website, setWebsite] = useState(""); // ハニーポット
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaError, setCaptchaError] = useState(false);
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | undefined>(undefined);
+
+  // Turnstile ウィジェットの読み込み・描画（サイトキーが設定されている場合のみ）
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+    const SCRIPT_ID = "cf-turnstile-script";
+
+    function render() {
+      const el = widgetRef.current;
+      if (!el || !window.turnstile || el.dataset.rendered) return;
+      widgetIdRef.current = window.turnstile.render(el, {
+        sitekey: TURNSTILE_SITE_KEY as string,
+        callback: (t) => {
+          setCaptchaToken(t);
+          setCaptchaError(false);
+        },
+        "expired-callback": () => setCaptchaToken(""),
+        "error-callback": () => setCaptchaToken(""),
+      });
+      el.dataset.rendered = "1";
+    }
+
+    if (window.turnstile) {
+      render();
+      return;
+    }
+    let script = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement("script");
+      script.id = SCRIPT_ID;
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+    script.addEventListener("load", render);
+    return () => script?.removeEventListener("load", render);
+  }, []);
+
+  function resetCaptcha() {
+    setCaptchaToken("");
+    if (window.turnstile) window.turnstile.reset(widgetIdRef.current);
+  }
 
   function update<K extends keyof Fields>(key: K, value: Fields[K]) {
     setFields((f) => ({ ...f, [key]: value }));
@@ -66,17 +132,24 @@ export function ContactForm() {
       first?.focus();
       return;
     }
+    // CAPTCHA が有効なのに未完了なら送信しない
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setCaptchaError(true);
+      widgetRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+      return;
+    }
     setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...fields, website }),
+        body: JSON.stringify({ ...fields, website, turnstileToken: captchaToken }),
       });
       if (!res.ok) throw new Error("request failed");
       setSubmitted(true);
     } catch {
       setStatus("error");
+      resetCaptcha(); // トークンは使い切りのため再取得させる
     }
   }
 
@@ -252,6 +325,18 @@ export function ContactForm() {
         </label>
         {err("consent")}
       </div>
+
+      {/* CAPTCHA（Cloudflare Turnstile。サイトキー設定時のみ表示） */}
+      {TURNSTILE_SITE_KEY && (
+        <div>
+          <div ref={widgetRef} />
+          {captchaError && (
+            <p role="alert" className="mt-1.5 font-ja text-[12px] text-amber">
+              認証を完了してください。
+            </p>
+          )}
+        </div>
+      )}
 
       {status === "error" && (
         <p role="alert" className="rounded-btn border border-amber/50 bg-amber/5 px-4 py-3 font-ja text-[13px] text-navy">
