@@ -74,6 +74,8 @@ export async function POST(req: Request) {
 
   try {
     const resend = new Resend(apiKey);
+
+    // 1) 管理者への通知（返信すると問い合わせ者へ届くよう replyTo を設定）
     const { error } = await resend.emails.send({
       from,
       to,
@@ -88,6 +90,37 @@ export async function POST(req: Request) {
         { status: 502 },
       );
     }
+
+    // 2) 送信者への自動返信（ベストエフォート。失敗しても受付自体は成功扱い）
+    //    返信先は監視中の受信アドレス（CONTACT_TO）にして、返信が届くようにする。
+    const autoReply = [
+      `${name} 様`,
+      "",
+      "この度は株式会社〇へお問い合わせいただき、誠にありがとうございます。",
+      "以下の内容でお問い合わせを受け付けました。内容を確認のうえ、担当者より折り返しご連絡いたします。",
+      "",
+      "※ 本メールは自動送信です。数日経っても返信がない場合は、お手数ですが再度ご連絡ください。",
+      "",
+      "──────────────────",
+      `お問い合わせ種別：${type}`,
+      "お問い合わせ内容：",
+      message,
+      "──────────────────",
+      "",
+      "株式会社〇 / maru Inc.",
+    ].join("\n");
+    try {
+      await resend.emails.send({
+        from,
+        to: email,
+        replyTo: to,
+        subject: "【株式会社〇】お問い合わせを受け付けました",
+        text: autoReply,
+      });
+    } catch (e) {
+      console.error("Auto-reply failed (non-fatal):", e);
+    }
+
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("Contact send failed:", e);
