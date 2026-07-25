@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { TextLink } from "@/components/ui/TextLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { MARU_MEANING } from "@/content/home";
@@ -85,9 +84,6 @@ export function MaruMeaning() {
           <p className="mt-6 font-ja text-body font-light leading-loose text-muted">
             {MARU_MEANING.body}
           </p>
-          <div className="mt-8">
-            <TextLink href={MARU_MEANING.cta.href}>{MARU_MEANING.cta.label}</TextLink>
-          </div>
         </Reveal>
       </div>
     </Section>

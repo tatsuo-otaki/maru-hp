@@ -8,7 +8,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { MISSION } from "@/content/home";
 
-export function Mission() {
+/**
+ * Mission セクション。
+ * ホームでは /about への導線を表示するが、/about 本編では自ページを
+ * 指す循環リンクになるため showCta={false} で非表示にする。
+ */
+export function Mission({ showCta = true }: { showCta?: boolean }) {
   const reduced = usePrefersReducedMotion();
 
   return (
@@ -42,9 +47,11 @@ export function Mission() {
           {MISSION.body}
         </p>
 
-        <div className="mt-12 flex justify-center">
-          <TextLink href={MISSION.cta.href}>{MISSION.cta.label}</TextLink>
-        </div>
+        {showCta && (
+          <div className="mt-12 flex justify-center">
+            <TextLink href={MISSION.cta.href}>{MISSION.cta.label}</TextLink>
+          </div>
+        )}
       </Reveal>
     </Section>
   );

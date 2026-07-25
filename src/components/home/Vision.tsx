@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { TextLink } from "@/components/ui/TextLink";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { VISION } from "@/content/home";
 
@@ -118,11 +117,6 @@ export function Vision() {
             );
           })}
         </ol>
-      </div>
-
-      {/* CTA */}
-      <div className="px-6 py-12 text-center md:px-20">
-        <TextLink href={VISION.cta.href}>{VISION.cta.label}</TextLink>
       </div>
     </section>
   );

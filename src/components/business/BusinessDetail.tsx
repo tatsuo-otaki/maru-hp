@@ -104,15 +104,17 @@ export function BusinessDetail() {
                     ))}
                   </ul>
 
+                  {/* 本編ページでは自セクションへの循環リンクを避け、
+                      各事業からそのまま相談へ進める導線にする */}
                   <Link
-                    href={biz.cta.href}
+                    href="/contact"
                     className="group mt-8 inline-flex items-center gap-2 border-b pb-0.5 font-ja text-[13px] font-medium"
                     style={{
                       color: c,
                       borderColor: `color-mix(in srgb, ${c} 33%, transparent)`,
                     }}
                   >
-                    {biz.cta.label}
+                    この事業について相談する
                     <span
                       aria-hidden="true"
                       className="transition-transform duration-200 group-hover:translate-x-1"
