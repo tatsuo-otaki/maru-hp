@@ -49,13 +49,6 @@ export const NEWS_PAGE = {
     },
     {
       category: "メディア掲載",
-      title: "クリエイターズステーション「風雲会社伝」にインタビューが掲載されました",
-      outlet: "クリエイターズステーション",
-      href: "https://www.creators-station.jp/interview/legends/32986",
-      external: true,
-    },
-    {
-      category: "メディア掲載",
       title: "ZIP-FM「Startup [N]」に出演しました",
       outlet: "ZIP-FM / YouTube",
       href: "https://www.youtube.com/watch?v=fj-d4dFoi2I",
@@ -116,6 +109,13 @@ export const NEWS_PAGE = {
       title: "IoT縛りの勉強会！IoTLT vol.1（名古屋）を開催しました",
       outlet: "クリエイトベースカナヤマ",
       href: "http://www.cre8.nagoya/a175",
+      external: true,
+    },
+    {
+      category: "メディア掲載",
+      title: "クリエイターズステーション「風雲会社伝」にインタビューが掲載されました",
+      outlet: "クリエイターズステーション",
+      href: "https://www.creators-station.jp/interview/legends/32986",
       external: true,
     },
   ] satisfies NewsItem[],
