@@ -110,19 +110,11 @@ export function ProgramBands() {
 
                 {/* 右：内容 */}
                 <div className="min-w-0 flex-1">
-                  {/* EN 微小ラベル */}
-                  <div
-                    className="mb-3.5 font-en text-[9px] font-semibold uppercase tracking-[0.2em]"
-                    style={{ color: c }}
-                  >
-                    {prog.en}
-                  </div>
-
-                  {/* 対象チップ */}
+                  {/* 対象（誰のためか：先頭に大きめのチップで明示） */}
                   <div className="mb-5">
                     <span
-                      className="inline-flex items-center gap-1.5 rounded-btn px-3 py-[5px] font-ja text-[11px] font-medium"
-                      style={{ color: c, backgroundColor: `color-mix(in srgb, ${c} 10%, white)` }}
+                      className="inline-flex items-center gap-2 rounded-btn px-3.5 py-1.5 font-ja text-[12.5px] font-medium"
+                      style={{ color: c, backgroundColor: `color-mix(in srgb, ${c} 12%, white)` }}
                     >
                       <span
                         aria-hidden="true"
@@ -133,16 +125,26 @@ export function ProgramBands() {
                     </span>
                   </div>
 
-                  {/* 引きコピー（一番大きい見出し） */}
-                  <h3 className="mb-5 max-w-[480px] font-ja text-[1.375rem] font-medium leading-[1.55] text-navy md:text-[2.125rem]">
-                    {prog.catch}
+                  {/* EN キッカー */}
+                  <div
+                    className="mb-2 font-en text-[9px] font-semibold uppercase tracking-[0.2em]"
+                    style={{ color: c }}
+                  >
+                    {prog.en}
+                  </div>
+
+                  {/* プログラム名（何を提供するか：主タイトル） */}
+                  <h3 className="max-w-[15em] font-ja text-[1.5rem] font-medium leading-[1.45] text-navy md:text-[2rem]">
+                    {prog.title}
                   </h3>
 
-                  {/* 正式名称＋説明 */}
-                  <p className="mb-2 font-ja text-[11px] font-semibold tracking-[0.04em] text-navy">
-                    {prog.title}
+                  {/* 引きコピー（価値の一言：リード） */}
+                  <p className="mt-4 max-w-[540px] font-ja text-[15px] font-medium leading-[1.75] text-navy md:text-[17px]">
+                    {prog.catch}
                   </p>
-                  <p className="mb-6 max-w-[560px] font-ja text-[13px] font-light leading-[1.9] text-muted">
+
+                  {/* 説明 */}
+                  <p className="mt-3 mb-6 max-w-[560px] font-ja text-[13px] font-light leading-[1.9] text-muted">
                     {prog.desc}
                   </p>
 
