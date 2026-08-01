@@ -17,6 +17,8 @@ export const HERO = {
   photo: {
     src: "/hero.jpg",
     alt: "自然光の差し込むオフィスで、チームがパソコンを囲んで協働する様子",
+    // 円形マスク内の表示位置（object-position）。被写体に合わせて調整する。
+    position: "90% center",
   },
 } as const;
 

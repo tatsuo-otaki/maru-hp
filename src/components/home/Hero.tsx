@@ -165,6 +165,7 @@ export function Hero() {
                 priority
                 sizes="(max-width: 640px) 240px, (max-width: 767px) 340px, (max-width: 1023px) 280px, (max-width: 1279px) 360px, 440px"
                 className="object-cover"
+                style={{ objectPosition: HERO.photo.position }}
               />
             </motion.div>
 
