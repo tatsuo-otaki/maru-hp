@@ -9,6 +9,12 @@ export const SITE = {
 } as const;
 
 /**
+ * Google Analytics 4 の測定ID（公開値。ブラウザに露出する前提の値）。
+ * Cookie 同意（accepted）時のみ読み込む。環境変数で上書き可能。
+ */
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-40DF1ZJG9J";
+
+/**
  * サイトの公開 URL（末尾スラッシュなし）。
  * 優先順位：NEXT_PUBLIC_SITE_URL（独自ドメイン設定用）
  *   → Vercel 本番ドメイン（自動）→ ローカル。
