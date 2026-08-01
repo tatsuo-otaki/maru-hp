@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HashScroll } from "@/components/layout/HashScroll";
+import { CookieConsent } from "@/components/consent/CookieConsent";
 import { SITE, getSiteUrl } from "@/lib/site";
 
 const notoSansJP = Noto_Sans_JP({
@@ -67,6 +68,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
