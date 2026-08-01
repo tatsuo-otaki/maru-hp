@@ -15,10 +15,10 @@ export const HERO = {
     { num: "03", label: "社会参加", color: "text-navy" },
   ],
   photo: {
-    src: "/hero.jpg",
+    src: "/hero-collab.jpg",
     alt: "自然光の差し込むオフィスで、チームがパソコンを囲んで協働する様子",
     // 円形マスク内の表示位置（object-position）。被写体に合わせて調整する。
-    position: "90% center",
+    position: "center",
   },
 } as const;
 
