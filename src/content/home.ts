@@ -15,9 +15,8 @@ export const HERO = {
     { num: "03", label: "社会参加", color: "text-navy" },
   ],
   photo: {
-    // プレースホルダ写真。実写真に差し替え予定（next.config の remotePatterns も見直す）。
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=920&h=920&fit=crop&auto=format",
-    alt: "多様なチームが自然光の中で協働する様子",
+    src: "/hero.jpg",
+    alt: "自然光の差し込むオフィスで、チームがパソコンを囲んで協働する様子",
   },
 } as const;
 
