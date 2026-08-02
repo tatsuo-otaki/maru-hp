@@ -1,30 +1,21 @@
-import Image from "next/image";
+import { SITE } from "@/lib/site";
 
 type LogoProps = {
   className?: string;
 };
 
 /**
- * 会社名とロゴを一体化したブランドロックアップ。
- * 「株式会社」＋〇ロゴ画像（U+3007 の代わりに公式ロゴを使用）。
- * ロゴの高さは文字の高さ（1em）に揃うよう CSS で制御する。
- * ※ 本文中の「株式会社〇」の〇は文字のまま。ここはブランド表記専用。
+ * 会社名のブランドロックアップ。
+ * 「〇」は漢数字の零（U+3007）の文字をそのまま使用する。
+ * 文字として扱うことで、字面の高さ・ベースラインが「株式会社」と完全に揃う。
+ * ※ SITE.name（= "株式会社〇"）を単一ソースとし、U+3007 の取り違えを防ぐ。
  */
 export function Logo({ className = "" }: LogoProps) {
   return (
     <span
-      className={`inline-flex items-center gap-1 font-ja font-medium tracking-wide text-navy ${className}`}
+      className={`inline-flex items-center font-ja font-medium tracking-wide text-navy ${className}`}
     >
-      株式会社
-      <Image
-        src="/maru-mark.png"
-        alt="〇"
-        width={64}
-        height={64}
-        priority
-        // 高さを文字高さ（1em）に一致させる。正方形なので幅も 1em。
-        style={{ height: "1em", width: "1em" }}
-      />
+      {SITE.name}
     </span>
   );
 }
