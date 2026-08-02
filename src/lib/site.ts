@@ -6,6 +6,8 @@ export const SITE = {
   mission: "幸せに働ける人を世界中に増やす。",
   /** AI・しごと学校（既存の外部サイト） */
   schoolUrl: "https://mcie.jp/",
+  /** maru のブログ（既存の外部サイト） */
+  blogUrl: "https://aiiot.jp/",
 } as const;
 
 /**
@@ -44,6 +46,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "事業内容", href: "/business" },
   { label: "企業・自治体の方へ", href: "/partners" },
   { label: "AI・しごと学校", href: SITE.schoolUrl, external: true },
+  { label: "ブログ", href: SITE.blogUrl, external: true },
   { label: "お問い合わせ", href: "/contact" },
 ];
 
@@ -53,6 +56,7 @@ export const FOOTER_ITEMS: NavItem[] = [
   { label: "事業内容", href: "/business" },
   { label: "企業・自治体の方へ", href: "/partners" },
   { label: "AI・しごと学校", href: SITE.schoolUrl, external: true },
+  { label: "ブログ", href: SITE.blogUrl, external: true },
   { label: "ニュース・プレス", href: "/news" },
   { label: "お問い合わせ", href: "/contact" },
   { label: "プライバシーポリシー", href: "/privacy" },
