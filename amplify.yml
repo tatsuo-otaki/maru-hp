@@ -1,0 +1,25 @@
+# AWS Amplify Hosting ビルド設定（Next.js App Router / SSR）
+# Amplify は Next.js を自動検知し、SSR（WEB_COMPUTE）としてデプロイする。
+# 環境変数（RESEND_API_KEY / CONTACT_TO / CONTACT_FROM / TURNSTILE_* /
+# NEXT_PUBLIC_SITE_URL 等）は Amplify コンソールの「環境変数」で設定する。
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Node 20 を使用（.nvmrc と一致）
+        - nvm install 20
+        - node -v
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    # Next.js SSR の成果物ディレクトリ
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - .next/cache/**/*
+      - node_modules/**/*
