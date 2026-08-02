@@ -17,7 +17,7 @@ export function Logo({ className = "" }: LogoProps) {
     >
       株式会社
       <Image
-        src="/maru-logo.png"
+        src="/maru-mark.png"
         alt="〇"
         width={64}
         height={64}

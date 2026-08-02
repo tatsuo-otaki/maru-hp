@@ -39,7 +39,7 @@ export function MaruMeaningTeaser() {
               transition={reduced ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }}
             >
               {/* 中央の〇は公式ロゴ画像を使用 */}
-              <image href="/maru-logo.png" x={-46} y={-46} width={92} height={92} />
+              <image href="/maru-mark.png" x={-46} y={-46} width={92} height={92} />
             </motion.g>
           </g>
           {MARU_MEANING.words.map((w, i) => (
