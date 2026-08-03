@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -15,6 +16,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "お問い合わせ", path: "/contact" }]} />
       <PageHero
         label={CONTACT.hero.label}
         title={CONTACT.hero.titleLines.map((line) => (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { NewsList } from "@/components/news/NewsList";
 import { ContactCta } from "@/components/home/ContactCta";
@@ -16,6 +17,7 @@ export default function NewsPage() {
   const { hero } = NEWS_PAGE;
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "ニュース・プレス", path: "/news" }]} />
       <PageHero
         label={hero.label}
         title={hero.titleLines.map((line) => (

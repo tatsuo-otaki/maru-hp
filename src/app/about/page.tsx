@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { Mission } from "@/components/home/Mission";
 import { Vision } from "@/components/home/Vision";
@@ -18,6 +19,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "私たちについて", path: "/about" }]} />
       <PageHero
         label="About"
         title={

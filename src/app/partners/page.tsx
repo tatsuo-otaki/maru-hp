@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -26,6 +27,7 @@ export default function PartnersPage() {
   const p = PARTNERS_HUB;
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "企業・自治体の方へ", path: "/partners" }]} />
       <PageHero
         label={p.hero.label}
         title={p.hero.titleLines.map((line) => (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/PageJsonLd";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
@@ -25,6 +26,14 @@ export const metadata: Metadata = pageMetadata({
 export default function CsrPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", path: "/" },
+          { name: "企業・自治体の方へ", path: "/partners" },
+          { name: "企業CSR共創パートナープログラム", path: "/partners/csr" },
+        ]}
+      />
+      <FaqJsonLd items={C.faq.items} />
       <PageHero
         label={C.hero.label}
         title={C.hero.titleLines.map((line) => (

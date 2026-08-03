@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { TextLink } from "@/components/ui/TextLink";
@@ -15,6 +16,7 @@ export const metadata: Metadata = pageMetadata({
 export default function PrivacyPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "プライバシーポリシー", path: "/privacy" }]} />
       <PageHero
         label={PRIVACY.hero.label}
         title={PRIVACY.hero.titleLines.map((line) => (

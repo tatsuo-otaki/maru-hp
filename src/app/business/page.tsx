@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { BusinessDetail } from "@/components/business/BusinessDetail";
 import { Steps } from "@/components/home/Steps";
@@ -20,6 +21,7 @@ export default function BusinessPage() {
   const { hero } = BUSINESS_PAGE;
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "事業内容", path: "/business" }]} />
       <PageHero
         label={hero.label}
         title={hero.titleLines.map((line) => (
