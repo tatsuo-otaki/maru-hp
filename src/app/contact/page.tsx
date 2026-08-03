@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CONTACT } from "@/content/contact";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "お問い合わせ",
   description:
     "AI・システム開発、DX、AI教育・人材育成、企業・自治体との連携、CSR、取材・メディア掲載など、幅広いご相談を受け付けています。株式会社〇（maru Inc.）へのお問い合わせはこちら。",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

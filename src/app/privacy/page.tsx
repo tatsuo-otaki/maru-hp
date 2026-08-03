@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { TextLink } from "@/components/ui/TextLink";
 import { PRIVACY } from "@/content/privacy";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "プライバシーポリシー",
   description:
     "株式会社〇（maru Inc.）のプライバシーポリシー。個人情報の取得・利用目的・第三者提供・安全管理・お問い合わせ窓口について記載しています。",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

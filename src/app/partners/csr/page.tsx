@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
@@ -14,11 +15,12 @@ const COLOR: Record<"teal" | "amber" | "navy", string> = {
   navy: "var(--color-navy)",
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "企業CSR共創パートナープログラム",
   description:
     "企業のCSR・社会貢献活動を、企画から実行・成果測定・報告まで支援。AI教育・地方創生・自治体実証・就労支援・国際人材育成を、企業の理念や重点課題に合わせて設計します。",
-};
+  path: "/partners/csr",
+});
 
 export default function CsrPage() {
   return (

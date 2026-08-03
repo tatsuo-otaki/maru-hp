@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
@@ -14,11 +15,12 @@ const COLOR: Record<"teal" | "amber" | "navy", string> = {
   navy: "var(--color-navy)",
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "企業協働型AI人材育成プログラム",
   description:
     "AIを学びたい人と、育成・採用・DXを進めたい企業をつなぐ実践型プログラム。企業の実際の課題を教材に、学びながら働く仕組みで、教育を実務と仕事へつなげます。",
-};
+  path: "/partners/ai-training",
+});
 
 export default function AiTrainingPage() {
   return (

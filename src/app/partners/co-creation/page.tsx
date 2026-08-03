@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
@@ -14,11 +15,12 @@ const COLOR: Record<"teal" | "amber" | "navy", string> = {
   navy: "var(--color-navy)",
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "実務実習・共創プロジェクト",
   description:
     "企業・自治体の実際の課題やアイデアを、AI・しごと学校の学生と一緒に実証・PoC。完成品ではなく、課題を見つけ、考え、試し、検証した経験を学生の実績にします。",
-};
+  path: "/partners/co-creation",
+});
 
 export default function CoCreationPage() {
   return (

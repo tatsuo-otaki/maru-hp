@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { BusinessDetail } from "@/components/business/BusinessDetail";
 import { Steps } from "@/components/home/Steps";
@@ -8,11 +9,12 @@ import { AiSchool } from "@/components/business/AiSchool";
 import { ContactCta } from "@/components/home/ContactCta";
 import { BUSINESS_PAGE } from "@/content/business";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "事業内容",
   description:
     "AI・システム開発、AI教育・人材育成、仕事と社会参加の仕組みづくり。株式会社〇は、開発・教育・仕事の機会づくりを一つの循環としてつなぎ、これまでの実績とともに、幸せに働ける人を増やします。",
-};
+  path: "/business",
+});
 
 export default function BusinessPage() {
   const { hero } = BUSINESS_PAGE;

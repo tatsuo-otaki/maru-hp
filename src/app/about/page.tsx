@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Mission } from "@/components/home/Mission";
 import { Vision } from "@/components/home/Vision";
@@ -7,11 +8,12 @@ import { Ceo } from "@/components/home/Ceo";
 import { CompanyOverview } from "@/components/about/CompanyOverview";
 import { ContactCta } from "@/components/home/ContactCta";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "私たちについて",
   description:
     "株式会社〇（maru Inc.）のMission・Vision・思想、代表メッセージ、会社概要をご紹介します。技術と教育と仕事をつなぎ、幸せに働ける人を世界中に増やします。",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

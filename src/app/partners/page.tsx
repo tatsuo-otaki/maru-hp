@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -14,11 +15,12 @@ const COLOR: Record<Accent, string> = {
   navy: "var(--color-navy)",
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "企業・自治体の方へ",
   description:
     "株式会社〇・AI・しごと学校は、AI教育・実務実習・地域課題の解決を通じて、企業・自治体・教育機関・就労支援機関と連携します。人材育成・共創・CSRの各プログラムと連携パートナー募集のご案内。",
-};
+  path: "/partners",
+});
 
 export default function PartnersPage() {
   const p = PARTNERS_HUB;
