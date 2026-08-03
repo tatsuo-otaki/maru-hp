@@ -3,7 +3,8 @@ import { ImageResponse } from "next/og";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-/** Apple タッチアイコン：ネイビー地に 〇（Warm White のリング） */
+/** Apple タッチアイコン：Warm White 地に本来色（ネイビー）の 〇 リング。
+ *  ※ iOS は透過を黒背景にするため、透過ではなくブランド地色を敷く。 */
 export default function AppleIcon() {
   return new ImageResponse(
     (
@@ -14,7 +15,7 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0F1F3D",
+          background: "#F8F6F2",
         }}
       >
         <div
@@ -22,7 +23,7 @@ export default function AppleIcon() {
             width: 104,
             height: 104,
             borderRadius: "50%",
-            border: "18px solid #F8F6F2",
+            border: "18px solid #0F1F3D",
           }}
         />
       </div>
