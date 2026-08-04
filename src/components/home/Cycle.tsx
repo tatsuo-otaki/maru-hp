@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
@@ -48,6 +49,10 @@ export function Cycle() {
   const reduced = usePrefersReducedMotion();
   const nodes = computeNodes();
   const arrowAngles = computeArrowAngles();
+  // スクロール検知は HTML コンテナで行う（SVG 要素への IntersectionObserver は
+  // iOS WebKit で発火しないため、ここに whileInView を持たせない）。
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(wrapRef, { once: true, margin: "0px 0px -15% 0px" });
 
   return (
     <Section id="cycle" className="relative overflow-hidden">
@@ -69,7 +74,7 @@ export function Cycle() {
         </h2>
       </Reveal>
 
-      <div className="flex justify-center overflow-visible">
+      <div ref={wrapRef} className="flex justify-center overflow-visible">
         <svg
           viewBox="0 0 760 680"
           // aspect-ratio を明示。iOS Safari は flex 内の SVG 高さを viewBox から
@@ -98,8 +103,7 @@ export function Cycle() {
             strokeWidth="1.5"
             opacity="0.22"
             initial={reduced ? false : { pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
+            animate={inView ? { pathLength: 1 } : undefined}
             transition={
               reduced ? undefined : { duration: 2, ease: "easeInOut", delay: 0.2 }
             }
@@ -117,10 +121,8 @@ export function Cycle() {
                 points={`${ax},${ay - 7} ${ax + 6},${ay + 5} ${ax - 6},${ay + 5}`}
                 fill="var(--color-teal)"
                 transform={`rotate(${rot}, ${ax}, ${ay})`}
-                initial={reduced ? { opacity: 0.5 } : { opacity: 0 }}
-                whileInView={{ opacity: 0.5 }}
-                viewport={{ once: true }}
-                animate={reduced ? undefined : { opacity: [0.35, 0.7, 0.35] }}
+                initial={{ opacity: 0 }}
+                animate={reduced ? { opacity: 0.5 } : { opacity: [0.35, 0.7, 0.35] }}
                 transition={
                   reduced
                     ? undefined
@@ -162,8 +164,7 @@ export function Cycle() {
             <motion.g
               key={`node-${i}`}
               initial={reduced ? false : { opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              animate={inView ? { opacity: 1, scale: 1 } : undefined}
               style={{ transformOrigin: `${n.nx}px ${n.ny}px` }}
               transition={
                 reduced
@@ -191,8 +192,7 @@ export function Cycle() {
               <motion.g
                 key={`label-${i}`}
                 initial={reduced ? false : { opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                animate={inView ? { opacity: 1 } : undefined}
                 transition={reduced ? undefined : { duration: 0.5, delay: 0.5 + i * 0.1 }}
               >
                 <line

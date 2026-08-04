@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,17 +10,19 @@ import { MARU_MEANING } from "@/content/home";
 
 export function MaruMeaning() {
   const reduced = usePrefersReducedMotion();
+  // SVG 要素への whileInView は iOS で発火しないため、HTML コンテナで検知する。
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(wrapRef, { once: true, margin: "0px 0px -15% 0px" });
 
   return (
     <Section id="maru" className="relative overflow-hidden bg-warm">
-      <div className="flex flex-col items-center gap-12 md:flex-row md:gap-20">
+      <div ref={wrapRef} className="flex flex-col items-center gap-12 md:flex-row md:gap-20">
         {/* 左：〇と意味語の図 */}
         <motion.svg
           viewBox="0 0 360 360"
           className="block aspect-square h-auto w-[300px] shrink-0 md:w-[360px]"
           initial={reduced ? false : { opacity: 0, scale: 0.92 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          animate={inView ? { opacity: 1, scale: 1 } : undefined}
           transition={reduced ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           role="img"
           aria-label="〇に込めた意味：つながり、循環、調和、肯定、多様性、堅牢性"
@@ -55,8 +58,7 @@ export function MaruMeaning() {
               opacity="0.82"
               letterSpacing="0.04em"
               initial={reduced ? false : { opacity: 0 }}
-              whileInView={{ opacity: 0.82 }}
-              viewport={{ once: true }}
+              animate={inView ? { opacity: 0.82 } : undefined}
               transition={
                 reduced
                   ? undefined
