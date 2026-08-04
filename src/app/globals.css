@@ -57,6 +57,20 @@ body {
   font-family: var(--font-ja);
 }
 
+/* 折り返し最適化。
+   見出しはバランス改行、本文は末尾の孤立文字を抑制する。
+   いずれも「テキストが折り返したときだけ」効くため、行が収まる PC では
+   見た目は変わらず、狭いスマホでのみ改行が整う。 */
+h1,
+h2,
+h3,
+:is(h1, h2, h3) span {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
 /* アンカーリンク（#vision 等）で sticky ヘッダー(64px)に隠れないようにする */
 [id] {
   scroll-margin-top: 5rem;
