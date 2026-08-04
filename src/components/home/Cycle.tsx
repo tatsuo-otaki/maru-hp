@@ -72,7 +72,9 @@ export function Cycle() {
       <div className="flex justify-center overflow-visible">
         <svg
           viewBox="0 0 760 680"
-          className="block w-full max-w-[760px] overflow-visible"
+          // aspect-ratio を明示。iOS Safari は flex 内の SVG 高さを viewBox から
+          // 正しく推定できず箱が潰れる（図が途中で切れる）ため、比率を固定する。
+          className="block h-auto w-full max-w-[760px] overflow-visible aspect-[760/680]"
           role="img"
           aria-label="技術・教育・仕事が循環する図。企業・社会の課題、AI・システム開発、AI教育・人材育成、実務経験・就労機会、社会への価値創出が円環でつながる。"
         >

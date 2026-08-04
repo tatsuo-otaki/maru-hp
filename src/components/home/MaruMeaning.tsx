@@ -16,7 +16,7 @@ export function MaruMeaning() {
         {/* 左：〇と意味語の図 */}
         <motion.svg
           viewBox="0 0 360 360"
-          className="block w-[300px] shrink-0 md:w-[360px]"
+          className="block aspect-square h-auto w-[300px] shrink-0 md:w-[360px]"
           initial={reduced ? false : { opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
