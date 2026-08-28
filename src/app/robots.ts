@@ -7,8 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // API エンドポイントはクロール不要
-      disallow: "/api/",
+      // API エンドポイント・SNSプロフィール専用のリンクハブはクロール不要
+      disallow: ["/api/", "/link"],
     },
     sitemap: `${base}/sitemap.xml`,
     host: base,

@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { HashScroll } from "@/components/layout/HashScroll";
-import { CookieConsent } from "@/components/consent/CookieConsent";
-import { Analytics } from "@/components/analytics/Analytics";
-import { StructuredData } from "@/components/seo/StructuredData";
 import { SITE, getSiteUrl } from "@/lib/site";
 
 const notoSansJP = Noto_Sans_JP({
@@ -66,13 +60,7 @@ export default function RootLayout({
       className={`${notoSansJP.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-warm text-navy">
-        <StructuredData />
-        <HashScroll />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <CookieConsent />
-        <Analytics />
+        {children}
       </body>
     </html>
   );
