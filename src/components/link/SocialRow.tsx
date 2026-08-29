@@ -1,5 +1,8 @@
+"use client";
+
 import { LINKHUB } from "@/content/linkhub";
 import { FacebookIcon, InstagramIcon, XIcon, YoutubeIcon } from "@/components/link/SocialIcons";
+import { trackCardClick } from "@/lib/analytics";
 
 const ICONS = {
   instagram: InstagramIcon,
@@ -20,6 +23,7 @@ export function SocialRow() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackCardClick(social.cardType)}
               aria-label={social.label}
               className="flex h-12 w-12 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal"
             >

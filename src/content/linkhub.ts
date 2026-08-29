@@ -12,6 +12,15 @@ function withUtm(url: string, content: string): string {
   return `${url}${sep}${UTM_MEDIUM}&utm_content=${content}`;
 }
 
+/**
+ * href（UTM付きURL）と cardType を同じ値から生成する。
+ * cardType はカードクリック時に GA4 へ送る card_click イベントの card_type パラメータで、
+ * utm_content と同じ値にして GA4側の集計とUTM計測を一致させる（analytics.trackCardClick参照）。
+ */
+function linkItem(url: string, cardType: string) {
+  return { cardType, href: withUtm(url, cardType) };
+}
+
 export const LINKHUB = {
   profile: {
     name: "株式会社〇",
@@ -25,16 +34,13 @@ export const LINKHUB = {
       key: "youtube",
       label: "最新 YouTube 動画",
       title: "最新動画をチェックする",
-      href: withUtm(
-        "https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w",
-        "youtube_latest",
-      ),
+      ...linkItem("https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w", "youtube_latest"),
     },
     {
       key: "blog",
       label: "最新ブログ記事",
       title: "最新記事をチェックする",
-      href: withUtm("https://aiiot.jp/", "blog_latest"),
+      ...linkItem("https://aiiot.jp/", "blog_latest"),
     },
   ],
 
@@ -48,7 +54,7 @@ export const LINKHUB = {
       heading: "学びたい方へ",
       body: "未経験からAIを仕事にする、実践型オンラインスクール。",
       buttonLabel: "AIしごと学校 入学案内",
-      href: withUtm("https://mcie.jp/", "school"),
+      ...linkItem("https://mcie.jp/", "school"),
     },
     {
       key: "business",
@@ -58,19 +64,19 @@ export const LINKHUB = {
       heading: "企業・法人の方へ",
       body: "AI・システム開発、DX支援のご相談を承ります。",
       buttonLabel: "開発のご相談はこちら",
-      href: withUtm("/contact", "business"),
+      ...linkItem("/contact", "business"),
     },
   ],
 
   /** SNSアイコン行 */
   socials: [
-    { key: "instagram", label: "Instagram", href: withUtm("https://www.instagram.com/maru.ai.tech/", "sns_instagram") },
-    { key: "x", label: "X", href: withUtm("https://x.com/tatsuo1020", "sns_x") },
-    { key: "facebook", label: "Facebook", href: withUtm("https://www.facebook.com/maruaiiot", "sns_facebook") },
+    { key: "instagram", label: "Instagram", ...linkItem("https://www.instagram.com/maru.ai.tech/", "sns_instagram") },
+    { key: "x", label: "X", ...linkItem("https://x.com/tatsuo1020", "sns_x") },
+    { key: "facebook", label: "Facebook", ...linkItem("https://www.facebook.com/maruaiiot", "sns_facebook") },
     {
       key: "youtube",
       label: "YouTube",
-      href: withUtm("https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w", "sns_youtube"),
+      ...linkItem("https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w", "sns_youtube"),
     },
   ],
 } as const;

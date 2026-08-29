@@ -1,4 +1,7 @@
+"use client";
+
 import type { LINKHUB } from "@/content/linkhub";
+import { trackCardClick } from "@/lib/analytics";
 
 type Item = (typeof LINKHUB)["ctas"][number];
 
@@ -15,6 +18,7 @@ export function CtaCard({ item }: { item: Item }) {
       href={item.href}
       target={item.href.startsWith("/") ? undefined : "_blank"}
       rel={item.href.startsWith("/") ? undefined : "noopener noreferrer"}
+      onClick={() => trackCardClick(item.cardType)}
       className={`group block rounded-card border p-6 transition-transform duration-200 hover:-translate-y-0.5 ${
         isPersonal
           ? "border-line bg-surface hover:border-amber"

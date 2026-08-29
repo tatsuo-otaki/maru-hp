@@ -1,5 +1,8 @@
+"use client";
+
 import { YoutubeIcon } from "@/components/link/SocialIcons";
 import type { LINKHUB } from "@/content/linkhub";
+import { trackCardClick } from "@/lib/analytics";
 
 type Item = (typeof LINKHUB)["latest"][number];
 
@@ -15,6 +18,7 @@ export function LatestCard({ item }: { item: Item }) {
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackCardClick(item.cardType)}
       className="group flex items-center gap-4 rounded-card border border-line bg-white p-3 transition-colors hover:border-teal"
     >
       <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[3px] bg-surface text-navy">
