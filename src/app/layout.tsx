@@ -57,6 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
+      data-scroll-behavior="smooth"
       className={`${notoSansJP.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-warm text-navy">

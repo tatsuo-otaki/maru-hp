@@ -4,6 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { Mission } from "@/components/home/Mission";
 import { Vision } from "@/components/home/Vision";
+import { EcosystemSection } from "@/components/about/EcosystemSection";
 import { MaruMeaning } from "@/components/home/MaruMeaning";
 import { Ceo } from "@/components/home/Ceo";
 import { CompanyOverview } from "@/components/about/CompanyOverview";
@@ -33,6 +34,7 @@ export default function AboutPage() {
       />
       <Mission showCta={false} />
       <Vision />
+      <EcosystemSection />
       <MaruMeaning />
       <Ceo />
       <CompanyOverview />
