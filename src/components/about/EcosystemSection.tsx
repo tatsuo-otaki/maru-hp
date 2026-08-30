@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
 import { EcosystemDiagram } from "@/components/about/EcosystemDiagram";
+import { EcosystemMobileDiagram } from "@/components/about/EcosystemMobileDiagram";
 import { EcosystemMobileFlow } from "@/components/about/EcosystemMobileFlow";
 import { ECOSYSTEM } from "@/content/ecosystem";
 
@@ -45,8 +46,11 @@ export function EcosystemSection() {
           </div>
         </Reveal>
 
-        <div className="mt-14 md:mt-16">
+        <div className="mt-10 px-6 md:mt-16 md:px-12 lg:px-20">
           <EcosystemDiagram />
+          <EcosystemMobileDiagram />
+        </div>
+        <div className="mt-10 md:hidden">
           <EcosystemMobileFlow />
         </div>
       </section>
