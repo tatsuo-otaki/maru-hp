@@ -1,4 +1,5 @@
 import { SetHtmlLang } from "@/components/global/SetHtmlLang";
+import { LangPreference } from "@/components/global/LangPreference";
 import { GlobalHero } from "@/components/global/GlobalHero";
 import { GlobalWhy } from "@/components/global/GlobalWhy";
 import { GlobalBusinesses } from "@/components/global/GlobalBusinesses";
@@ -19,6 +20,7 @@ export function GlobalPageContent({ lang }: { lang: GLang }) {
   return (
     <>
       <SetHtmlLang lang={lang} />
+      <LangPreference lang={lang} />
       <GlobalHero lang={lang} />
       <GlobalWhy lang={lang} />
       <GlobalBusinesses lang={lang} />
