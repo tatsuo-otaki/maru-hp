@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news",
     "/contact",
     "/privacy",
+    "/global",
+    "/global/en",
+    "/global/fr",
   ];
   const now = new Date();
   return paths.map((path) => ({
