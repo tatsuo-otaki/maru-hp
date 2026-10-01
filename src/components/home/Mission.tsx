@@ -17,11 +17,11 @@ export function Mission({ showCta = true }: { showCta?: boolean }) {
   const reduced = usePrefersReducedMotion();
 
   return (
-    <Section id="mission" className="relative overflow-hidden py-24 text-center md:py-32">
+    <Section id="mission" className="relative overflow-hidden py-32 text-center md:py-44">
       {/* 背景の薄い〇（ゆっくり呼吸） */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 left-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(15,31,61,0.045)]"
+        className="pointer-events-none absolute top-1/2 left-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(15,31,61,0.12)]"
         animate={reduced ? undefined : { scale: [1, 1.015, 1] }}
         transition={
           reduced ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }
