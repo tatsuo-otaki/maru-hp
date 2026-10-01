@@ -4,7 +4,7 @@
 
 - 私たちについて `/about`（**会社概要を内包**）
 - 事業内容 `/business`（`#ai-development` / `#ai-education` / `#social`）
-- AI・しごと学校（外部サイト `https://mcie.jp/`・別タブ）
+- AI・しごと学校（外部サイト `https://www.ai-career-academy.com/`・別タブ）
 - 企業・自治体の方へ `/partners`（**採用・パートナー募集を内包**）
 - プロジェクト・実績 `/projects`（一覧 → `/projects/[slug]`）
 - お問い合わせ `/contact`（ヘッダー CTA）

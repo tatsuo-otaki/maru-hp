@@ -5,7 +5,7 @@ export const SITE = {
   nameEn: "maru Inc.",
   mission: "幸せに働ける人を世界中に増やす。",
   /** AI・しごと学校（既存の外部サイト） */
-  schoolUrl: "https://mcie.jp/",
+  schoolUrl: "https://www.ai-career-academy.com/",
   /** maru のブログ（既存の外部サイト） */
   blogUrl: "https://aiiot.jp/",
 } as const;

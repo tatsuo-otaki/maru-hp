@@ -54,7 +54,7 @@ export const LINKHUB = {
       heading: "学びたい方へ",
       body: "未経験からAIを仕事にする、実践型オンラインスクール。",
       buttonLabel: "AIしごと学校 入学案内",
-      ...linkItem("https://mcie.jp/", "school"),
+      ...linkItem("https://www.ai-career-academy.com/", "school"),
     },
     {
       key: "business",
