@@ -3,7 +3,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextLink } from "@/components/ui/TextLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { NEWS } from "@/content/home";
-import { NEWS_PAGE, NEWS_CATEGORY_COLOR } from "@/content/news";
+import { NEWS_PAGE, NEWS_CATEGORY_COLOR, newsLink } from "@/content/news";
 
 const COLOR = {
   teal: "var(--color-teal)",
@@ -39,6 +39,7 @@ export function News() {
       <ul className="border-t border-line">
         {latest.map((item) => {
           const c = COLOR[NEWS_CATEGORY_COLOR[item.category]];
+          const link = newsLink(item);
           const rowClass =
             "group flex flex-col gap-2 border-b border-line py-5 md:flex-row md:items-center md:gap-5";
           const inner = (
@@ -64,22 +65,22 @@ export function News() {
                   </span>
                 )}
               </span>
-              {item.href && (
+              {link && (
                 <span
                   aria-hidden="true"
                   className="ml-auto hidden shrink-0 font-en text-[12px] text-muted transition-transform duration-200 group-hover:translate-x-0.5 md:inline"
                 >
-                  {item.external ? "↗" : "→"}
+                  {link.external ? "↗" : "→"}
                 </span>
               )}
             </>
           );
           return (
             <li key={item.title}>
-              {item.href ? (
+              {link ? (
                 <a
-                  href={item.href}
-                  {...(item.external
+                  href={link.href}
+                  {...(link.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                   className={`${rowClass} transition-colors hover:bg-navy/[0.02]`}

@@ -26,11 +26,28 @@ export type NewsItem = {
   outlet?: string;
   /** 年（判明分のみ） */
   year?: string;
-  /** リンク先（無い場合は非リンク表示） */
+  /** リンク先（無い場合は非リンク表示。slug がある場合は省略可） */
   href?: string;
   /** 外部リンク（別タブ） */
   external?: boolean;
+  /** 自社の記事詳細ページ（/news/{slug}）を持つ場合に設定。本文は src/content/news/{slug}.mdx */
+  slug?: string;
+  /** ISO日付（例 "2026-10-05"）。slug付き記事の公開日として使用 */
+  date?: string;
+  /** 一覧・OGP descriptionに使う簡易要約（任意） */
+  excerpt?: string;
 };
+
+/**
+ * 項目のリンク先を1箇所で決定する。
+ * href が明示されていれば最優先（既存の外部リンク項目の挙動を維持）、
+ * なければ slug から自社記事詳細ページへのリンクを組み立てる。
+ */
+export function newsLink(item: NewsItem): { href: string; external: boolean } | null {
+  if (item.href) return { href: item.href, external: !!item.external };
+  if (item.slug) return { href: `/news/${item.slug}`, external: false };
+  return null;
+}
 
 export const NEWS_PAGE = {
   hero: {
@@ -42,6 +59,14 @@ export const NEWS_PAGE = {
   mediaNote:
     "取材、インタビュー、講演、寄稿、番組出演などのご相談は、お問い合わせよりお気軽にご連絡ください。",
   items: [
+    {
+      category: "お知らせ",
+      title: "ニュース・プレスページをリニューアルしました",
+      slug: "renewal-news-press",
+      date: "2026-10-05",
+      excerpt:
+        "お知らせやプレスリリースを、詳細記事としてご覧いただけるようになりました。",
+    },
     {
       category: "メディア掲載",
       title: "NHK「凄ワザ！夢かなえますSP」に開発リーダーとして出演しました",

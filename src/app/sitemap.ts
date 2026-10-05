@@ -1,9 +1,13 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site";
+import { NEWS_PAGE } from "@/content/news";
 
-/** 主要ページのサイトマップ（詳細ページは今後データ確定時に追加） */
+/** 主要ページのサイトマップ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
+  const newsSlugPaths = NEWS_PAGE.items
+    .filter((item) => item.slug)
+    .map((item) => `/news/${item.slug}`);
   const paths = [
     "/",
     "/about",
@@ -13,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/partners/co-creation",
     "/partners/csr",
     "/news",
+    ...newsSlugPaths,
     "/contact",
     "/privacy",
     "/global",
