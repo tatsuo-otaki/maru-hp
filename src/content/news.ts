@@ -60,12 +60,12 @@ export const NEWS_PAGE = {
     "取材、インタビュー、講演、寄稿、番組出演などのご相談は、お問い合わせよりお気軽にご連絡ください。",
   items: [
     {
-      category: "お知らせ",
-      title: "ニュース・プレスページをリニューアルしました",
-      slug: "renewal-news-press",
+      category: "プレスリリース",
+      title: "コーポレートサイトをリニューアルしました",
+      slug: "corporate-site-renewal",
       date: "2026-10-05",
       excerpt:
-        "お知らせやプレスリリースを、詳細記事としてご覧いただけるようになりました。",
+        "Mission・事業内容・プロジェクト実績などを伝えるコーポレートサイトを全面的にリニューアルしました。",
     },
     {
       category: "メディア掲載",
