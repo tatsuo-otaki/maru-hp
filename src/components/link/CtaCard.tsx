@@ -38,7 +38,7 @@ export function CtaCard({ item }: { item: Item }) {
         {item.eyebrow}
       </p>
       <h2
-        className={`mt-2 font-ja text-[22px] leading-snug font-semibold ${
+        className={`mt-2 font-ja text-[22px] leading-snug font-semibold whitespace-pre-line ${
           isCorporate ? "text-white" : "text-navy"
         }`}
       >

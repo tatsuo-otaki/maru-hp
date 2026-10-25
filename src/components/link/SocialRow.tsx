@@ -14,7 +14,7 @@ const ICONS = {
 /** SNSアイコン行。指で押しやすいよう 1辺44px以上のタップ領域を確保する。 */
 export function SocialRow() {
   return (
-    <ul className="flex items-center justify-center gap-3">
+    <ul className="flex items-center justify-center gap-4">
       {LINKHUB.socials.map((social) => {
         const Icon = ICONS[social.key as keyof typeof ICONS];
         return (
@@ -25,9 +25,9 @@ export function SocialRow() {
               rel="noopener noreferrer"
               onClick={() => trackCardClick(social.cardType)}
               aria-label={social.label}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal"
+              className="flex h-16 w-16 items-center justify-center rounded-full border border-line bg-surface text-navy shadow-sm transition-colors hover:border-teal hover:bg-white hover:text-teal"
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="h-7 w-7" />
             </a>
           </li>
         );

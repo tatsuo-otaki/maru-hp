@@ -65,7 +65,7 @@ export const LINKHUB = {
       key: "home",
       variant: "site" as const,
       eyebrow: "コーポレートサイト",
-      heading: "株式会社〇について詳しく知る",
+      heading: "株式会社〇について\n詳しく知る",
       body: "Mission・事業内容・プロジェクト実績など、会社の詳しい情報はこちら。",
       buttonLabel: "ホームページを見る",
       ...linkItem("/", "home"),
