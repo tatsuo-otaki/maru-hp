@@ -1,9 +1,14 @@
 "use client";
 
-import type { LINKHUB } from "@/content/linkhub";
 import { trackCardClick } from "@/lib/analytics";
 
-type Item = (typeof LINKHUB)["latest"][number];
+type Item = {
+  key: string;
+  label: string;
+  title: string;
+  href: string;
+  cardType: string;
+};
 
 /**
  * 最新コンテンツ導線（ブログ）の横長カード。

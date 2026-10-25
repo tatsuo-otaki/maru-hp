@@ -7,7 +7,7 @@
 const UTM_MEDIUM = "utm_source=linkhub&utm_medium=bio";
 
 /** 各リンクの計測用 UTM パラメータ付き URL を組み立てる */
-function withUtm(url: string, content: string): string {
+export function withUtm(url: string, content: string): string {
   const sep = url.includes("?") ? "&" : "?";
   return `${url}${sep}${UTM_MEDIUM}&utm_content=${content}`;
 }

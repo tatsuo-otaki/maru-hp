@@ -5,7 +5,8 @@ import { ProfileHeader } from "@/components/link/ProfileHeader";
 import { LatestCard } from "@/components/link/LatestCard";
 import { CtaCard } from "@/components/link/CtaCard";
 import { SocialRow } from "@/components/link/SocialRow";
-import { LINKHUB } from "@/content/linkhub";
+import { LINKHUB, withUtm } from "@/content/linkhub";
+import { getLatestBlogPost } from "@/lib/blog";
 import { SITE } from "@/lib/site";
 
 /**
@@ -18,14 +19,22 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function LinkHubPage() {
+export default async function LinkHubPage() {
+  const latestBlogPost = await getLatestBlogPost();
+
+  const latestItems = LINKHUB.latest.map((item) =>
+    item.key === "blog" && latestBlogPost
+      ? { ...item, title: latestBlogPost.title, href: withUtm(latestBlogPost.href, item.cardType) }
+      : item,
+  );
+
   return (
     <div className="min-h-screen bg-warm">
       <div className="mx-auto max-w-[420px] px-6 pb-14">
         <ProfileHeader />
 
         <section className="mt-2 space-y-3" aria-label="最新コンテンツ">
-          {LINKHUB.latest.map((item) => (
+          {latestItems.map((item) => (
             <LatestCard key={item.key} item={item} />
           ))}
         </section>
