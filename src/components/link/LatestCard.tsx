@@ -27,6 +27,11 @@ export function LatestCard({ item }: { item: Item }) {
       onClick={() => trackCardClick(item.cardType)}
       className="group block overflow-hidden rounded-card border border-line bg-white transition-colors hover:border-teal"
     >
+      <div className="flex items-center gap-2 bg-navy px-4 py-3">
+        <span className="h-2 w-2 shrink-0 rounded-full bg-teal" aria-hidden="true" />
+        <span className="font-ja text-[16px] font-semibold tracking-wide text-white">{item.label}</span>
+      </div>
+
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface">
         {item.imageUrl ? (
           <Image
@@ -44,14 +49,9 @@ export function LatestCard({ item }: { item: Item }) {
       </div>
 
       <div className="flex items-start gap-3 p-4">
-        <div className="min-w-0 flex-1">
-          <span className="block font-en text-[9px] font-semibold tracking-[0.12em] text-teal uppercase">
-            {item.label}
-          </span>
-          <span className="mt-1.5 block font-ja text-[14px] leading-snug font-medium text-navy">
-            {item.title}
-          </span>
-        </div>
+        <span className="min-w-0 flex-1 font-ja text-[14px] leading-snug font-medium text-navy">
+          {item.title}
+        </span>
         <span
           aria-hidden="true"
           className="mt-0.5 shrink-0 text-navy/40 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-teal"
