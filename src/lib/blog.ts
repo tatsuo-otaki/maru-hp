@@ -5,14 +5,39 @@ import { SITE } from "@/lib/site";
  * このWordPress環境は pretty permalink が無効なため、REST API・記事URLともに
  * index.php を経由するパスのみが有効（例: /index.php/wp-json/...）。
  */
-const WP_API_URL = `${SITE.blogUrl}index.php/wp-json/wp/v2/posts?per_page=1&_fields=link,title`;
+/**
+ * _fields でレスポンスを絞ると _embedded（アイキャッチ画像）が
+ * WordPress側で一緒に除外されてしまうため、_fields は指定しない。
+ * 1記事分のみの取得なのでレスポンスサイズは問題にならない。
+ */
+const WP_API_URL = `${SITE.blogUrl}index.php/wp-json/wp/v2/posts?per_page=1&_embed=wp:featuredmedia`;
 
 export type LatestBlogPost = {
   title: string;
   href: string;
+  /** アイキャッチ画像のURL（未設定の記事の場合は null） */
+  imageUrl: string | null;
 };
 
-type WpPost = { link: string; title: { rendered: string } };
+type WpMediaSize = { source_url: string; width: number; height: number };
+
+type WpPost = {
+  link: string;
+  title: { rendered: string };
+  _embedded?: {
+    "wp:featuredmedia"?: Array<{
+      source_url: string;
+      media_details?: { sizes?: Record<string, WpMediaSize> };
+    }>;
+  };
+};
+
+/** アイキャッチ画像から、カード表示に適したサイズのURLを選ぶ（なければ元画像） */
+function pickThumbnailUrl(post: WpPost): string | null {
+  const media = post._embedded?.["wp:featuredmedia"]?.[0];
+  if (!media) return null;
+  return media.media_details?.sizes?.medium_large?.source_url ?? media.source_url;
+}
 
 /** WordPressが返すHTMLエンティティ（&#8217; 等）をデコードする */
 function decodeHtmlEntities(text: string): string {
@@ -43,6 +68,7 @@ export async function getLatestBlogPost(): Promise<LatestBlogPost | null> {
     return {
       title: decodeHtmlEntities(post.title.rendered),
       href: post.link,
+      imageUrl: pickThumbnailUrl(post),
     };
   } catch {
     return null;

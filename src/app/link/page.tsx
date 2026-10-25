@@ -24,7 +24,12 @@ export default async function LinkHubPage() {
 
   const latestItems = LINKHUB.latest.map((item) =>
     item.key === "blog" && latestBlogPost
-      ? { ...item, title: latestBlogPost.title, href: withUtm(latestBlogPost.href, item.cardType) }
+      ? {
+          ...item,
+          title: latestBlogPost.title,
+          href: withUtm(latestBlogPost.href, item.cardType),
+          imageUrl: latestBlogPost.imageUrl,
+        }
       : item,
   );
 
