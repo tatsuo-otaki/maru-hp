@@ -57,11 +57,11 @@ export default async function LinkHubPage() {
         <footer className="mt-10 flex flex-col items-center gap-2 border-t border-line pt-8 text-center">
           <a
             href="/contact"
-            className="font-ja text-[13px] text-navy underline decoration-line underline-offset-4 hover:text-teal"
+            className="font-ja text-[15px] text-navy underline decoration-line underline-offset-4 hover:text-teal"
           >
             お問い合わせ
           </a>
-          <p className="font-en text-[11px] text-muted">
+          <p className="font-en text-[12px] text-muted">
             © {new Date().getFullYear()} {SITE.name} ({SITE.nameEn})
           </p>
         </footer>

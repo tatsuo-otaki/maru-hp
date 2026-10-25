@@ -29,7 +29,7 @@ export function LatestCard({ item }: { item: Item }) {
     >
       <div className="flex items-center gap-2 bg-navy px-4 py-3">
         <span className="h-2 w-2 shrink-0 rounded-full bg-teal" aria-hidden="true" />
-        <span className="font-ja text-[16px] font-semibold tracking-wide text-white">{item.label}</span>
+        <span className="font-ja text-[17px] font-semibold tracking-wide text-white">{item.label}</span>
       </div>
 
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface">
@@ -49,12 +49,12 @@ export function LatestCard({ item }: { item: Item }) {
       </div>
 
       <div className="flex items-start gap-3 p-4">
-        <span className="min-w-0 flex-1 font-ja text-[14px] leading-snug font-medium text-navy">
+        <span className="min-w-0 flex-1 font-ja text-[16px] leading-snug font-medium text-navy">
           {item.title}
         </span>
         <span
           aria-hidden="true"
-          className="mt-0.5 shrink-0 text-navy/40 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-teal"
+          className="mt-0.5 shrink-0 text-[18px] text-navy/40 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-teal"
         >
           →
         </span>

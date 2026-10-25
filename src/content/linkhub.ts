@@ -41,12 +41,11 @@ export const LINKHUB = {
     },
   ],
 
-  /** 個人向け / 法人向け CTA カード（色分け必須） */
+  /** 個人向け / 法人向け / コーポレートサイト CTA カード（色分け必須） */
   ctas: [
     {
       key: "school",
       variant: "personal" as const,
-      number: "01",
       eyebrow: "個人の方へ ／ AI教育",
       heading: "学びたい方へ",
       body: "未経験からAIを仕事にする、実践型オンラインスクール。",
@@ -56,12 +55,20 @@ export const LINKHUB = {
     {
       key: "business",
       variant: "corporate" as const,
-      number: "02",
       eyebrow: "企業・法人の方へ ／ AI開発",
       heading: "企業・法人の方へ",
       body: "AI・システム開発、DX支援のご相談を承ります。",
       buttonLabel: "開発のご相談はこちら",
       ...linkItem("/contact", "business"),
+    },
+    {
+      key: "home",
+      variant: "site" as const,
+      eyebrow: "コーポレートサイト",
+      heading: "株式会社〇について詳しく知る",
+      body: "Mission・事業内容・プロジェクト実績など、会社の詳しい情報はこちら。",
+      buttonLabel: "ホームページを見る",
+      ...linkItem("/", "home"),
     },
   ],
 

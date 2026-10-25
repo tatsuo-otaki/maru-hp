@@ -32,9 +32,9 @@ export function ProfileHeader() {
         />
       </div>
 
-      <p className="mt-5 font-ja text-[14px] font-medium text-navy">{profile.name}</p>
-      <p className="mt-1 font-en text-[11px] tracking-wide text-muted">{profile.nameEn}</p>
-      <p className="mt-3 font-ja text-[13px] text-muted">{profile.tagline}</p>
+      <p className="mt-5 font-ja text-[18px] font-medium text-navy">{profile.name}</p>
+      <p className="mt-1 font-en text-[13px] tracking-wide text-muted">{profile.nameEn}</p>
+      <p className="mt-3 font-ja text-[15px] text-muted">{profile.tagline}</p>
     </header>
   );
 }
