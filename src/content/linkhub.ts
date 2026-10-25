@@ -28,14 +28,11 @@ export const LINKHUB = {
     tagline: "AI・システム開発 ／ AI・しごと学校",
   },
 
-  /** 最新コンテンツ導線（YouTube / ブログ） */
+  /**
+   * 最新コンテンツ導線（ブログ）。
+   * YouTube動画は未公開のため一旦非表示。公開再開時は "youtube" エントリを復活させる。
+   */
   latest: [
-    {
-      key: "youtube",
-      label: "最新 YouTube 動画",
-      title: "最新動画をチェックする",
-      ...linkItem("https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w", "youtube_latest"),
-    },
     {
       key: "blog",
       label: "最新ブログ記事",
