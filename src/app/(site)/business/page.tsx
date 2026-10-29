@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
-import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/seo/PageJsonLd";
+import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { BusinessDetail } from "@/components/business/BusinessDetail";
 import { Steps } from "@/components/home/Steps";
@@ -8,6 +8,10 @@ import { Cycle } from "@/components/home/Cycle";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { AiSchool } from "@/components/business/AiSchool";
 import { ContactCta } from "@/components/home/ContactCta";
+import { Section } from "@/components/ui/Section";
+import { Reveal } from "@/components/ui/Reveal";
+import { Faq } from "@/components/ui/Faq";
+import { SectionHead } from "@/components/partners/SectionHead";
 import { BUSINESS_PAGE } from "@/content/business";
 import { BUSINESS } from "@/content/home";
 
@@ -30,6 +34,7 @@ export default function BusinessPage() {
           path: `/business#${biz.slug}`,
         }))}
       />
+      <FaqJsonLd items={BUSINESS_PAGE.faq.items} />
       <PageHero
         label={hero.label}
         title={hero.titleLines.map((line) => (
@@ -44,6 +49,14 @@ export default function BusinessPage() {
       <Cycle />
       <ProjectGrid />
       <AiSchool />
+
+      <Section id="faq" className="bg-surface">
+        <SectionHead label="FAQ" title={BUSINESS_PAGE.faq.heading} />
+        <Reveal delay={0.1} className="max-w-3xl">
+          <Faq items={BUSINESS_PAGE.faq.items} />
+        </Reveal>
+      </Section>
+
       <ContactCta />
     </>
   );
