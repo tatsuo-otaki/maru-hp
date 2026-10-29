@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site";
 import { NEWS_PAGE } from "@/content/news";
+import { PROJECTS_PAGE } from "@/content/projects";
 
 /** 主要ページのサイトマップ */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -15,6 +16,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: item.date ? new Date(item.date) : now,
       changeFrequency: "monthly",
       priority: 0.7,
+    }));
+
+  const workEntries: MetadataRoute.Sitemap = PROJECTS_PAGE.items
+    .filter((item) => item.slug)
+    .map((item) => ({
+      url: `${base}/works/${item.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     }));
 
   const staticPaths = [
@@ -39,5 +49,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : 0.7,
   }));
 
-  return [...staticEntries, ...newsEntries];
+  return [...staticEntries, ...newsEntries, ...workEntries];
 }
