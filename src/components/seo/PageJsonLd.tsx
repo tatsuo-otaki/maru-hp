@@ -31,6 +31,33 @@ export function FaqJsonLd({ items }: { items: readonly { q: string; a: string }[
 }
 
 /**
+ * 事業の構造化データ（schema.org Service）。
+ * provider は StructuredData.tsx が出力する Organization の @id を参照する。
+ */
+export function ServiceJsonLd({
+  items,
+}: {
+  items: readonly { name: string; description: string; path: string }[];
+}) {
+  const base = getSiteUrl();
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@graph": items.map((it) => ({
+          "@type": "Service",
+          name: it.name,
+          description: it.description,
+          url: `${base}${it.path}`,
+          areaServed: "JP",
+          provider: { "@id": `${base}/#organization` },
+        })),
+      }}
+    />
+  );
+}
+
+/**
  * パンくずの構造化データ（schema.org BreadcrumbList）。
  * items は上位→下位の順（例：ホーム → 企業・自治体の方へ → 各ページ）。
  */

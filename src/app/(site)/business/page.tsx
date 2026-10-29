@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
-import { BreadcrumbJsonLd } from "@/components/seo/PageJsonLd";
+import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/seo/PageJsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 import { BusinessDetail } from "@/components/business/BusinessDetail";
 import { Steps } from "@/components/home/Steps";
@@ -9,6 +9,7 @@ import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { AiSchool } from "@/components/business/AiSchool";
 import { ContactCta } from "@/components/home/ContactCta";
 import { BUSINESS_PAGE } from "@/content/business";
+import { BUSINESS } from "@/content/home";
 
 export const metadata: Metadata = pageMetadata({
   title: "事業内容",
@@ -22,6 +23,13 @@ export default function BusinessPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "ホーム", path: "/" }, { name: "事業内容", path: "/business" }]} />
+      <ServiceJsonLd
+        items={BUSINESS.items.map((biz) => ({
+          name: biz.title,
+          description: biz.lead,
+          path: `/business#${biz.slug}`,
+        }))}
+      />
       <PageHero
         label={hero.label}
         title={hero.titleLines.map((line) => (
