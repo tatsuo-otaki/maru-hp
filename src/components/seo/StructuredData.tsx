@@ -1,4 +1,5 @@
 import { SITE, getSiteUrl } from "@/lib/site";
+import { SOCIAL_URLS } from "@/content/linkhub";
 
 /**
  * サイト共通の構造化データ（JSON-LD / schema.org）。
@@ -35,8 +36,22 @@ export function StructuredData() {
           addressLocality: "名古屋市西区",
           streetAddress: "名駅2-4-3 ウエスタンビル3F",
         },
-        // 関連する公式サイト（ブログ・AI・しごと学校）
-        sameAs: [SITE.blogUrl, SITE.schoolUrl],
+        knowsAbout: ["AI開発", "機械学習", "生成AI", "AI教育", "人材育成"],
+        // 関連する公式サイト（ブログ・AI・しごと学校・公式SNS）
+        sameAs: [
+          SITE.blogUrl,
+          SITE.schoolUrl,
+          SOCIAL_URLS.instagram,
+          SOCIAL_URLS.x,
+          SOCIAL_URLS.facebook,
+          SOCIAL_URLS.youtube,
+        ],
+        subOrganization: {
+          "@type": "Organization",
+          "@id": "https://www.ai-career-academy.com/#school",
+          name: "AI・しごと学校",
+          url: SITE.schoolUrl,
+        },
       },
       {
         "@type": "WebSite",

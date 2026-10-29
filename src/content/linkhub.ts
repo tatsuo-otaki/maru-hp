@@ -21,6 +21,18 @@ function linkItem(url: string, cardType: string) {
   return { cardType, href: withUtm(url, cardType) };
 }
 
+/**
+ * 公式SNSの素のURL（UTMなし）。
+ * schema.org の sameAs（src/components/seo/StructuredData.tsx）にも使うため、
+ * UTM付きリンクとは別に公開している。
+ */
+export const SOCIAL_URLS = {
+  instagram: "https://www.instagram.com/maru.ai.tech/",
+  x: "https://x.com/tatsuo1020",
+  facebook: "https://www.facebook.com/maruaiiot",
+  youtube: "https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w",
+} as const;
+
 export const LINKHUB = {
   profile: {
     name: "株式会社〇",
@@ -74,13 +86,9 @@ export const LINKHUB = {
 
   /** SNSアイコン行 */
   socials: [
-    { key: "instagram", label: "Instagram", ...linkItem("https://www.instagram.com/maru.ai.tech/", "sns_instagram") },
-    { key: "x", label: "X", ...linkItem("https://x.com/tatsuo1020", "sns_x") },
-    { key: "facebook", label: "Facebook", ...linkItem("https://www.facebook.com/maruaiiot", "sns_facebook") },
-    {
-      key: "youtube",
-      label: "YouTube",
-      ...linkItem("https://www.youtube.com/channel/UCm_Bd32WmHHMNBQWv1f2R0w", "sns_youtube"),
-    },
+    { key: "instagram", label: "Instagram", ...linkItem(SOCIAL_URLS.instagram, "sns_instagram") },
+    { key: "x", label: "X", ...linkItem(SOCIAL_URLS.x, "sns_x") },
+    { key: "facebook", label: "Facebook", ...linkItem(SOCIAL_URLS.facebook, "sns_facebook") },
+    { key: "youtube", label: "YouTube", ...linkItem(SOCIAL_URLS.youtube, "sns_youtube") },
   ],
 } as const;
