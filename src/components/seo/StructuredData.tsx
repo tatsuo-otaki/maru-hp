@@ -1,5 +1,6 @@
 import { SITE, getSiteUrl } from "@/lib/site";
 import { SOCIAL_URLS } from "@/content/linkhub";
+import { CEO } from "@/content/home";
 
 /**
  * サイト共通の構造化データ（JSON-LD / schema.org）。
@@ -9,6 +10,7 @@ import { SOCIAL_URLS } from "@/content/linkhub";
  */
 export function StructuredData() {
   const url = getSiteUrl();
+  const ceoId = `${url}/about#ceo`;
 
   const data = {
     "@context": "https://schema.org",
@@ -24,11 +26,7 @@ export function StructuredData() {
           "AI・システム開発、AI教育・人材育成、仕事と社会参加の仕組みづくりを通じて、誰もが自分らしく幸せに働ける社会をつくる会社。",
         slogan: SITE.mission,
         foundingDate: "2021-08-27",
-        founder: {
-          "@type": "Person",
-          name: "大瀧 達生",
-          jobTitle: "代表取締役",
-        },
+        founder: { "@id": ceoId },
         address: {
           "@type": "PostalAddress",
           addressCountry: "JP",
@@ -61,6 +59,17 @@ export function StructuredData() {
         url,
         inLanguage: "ja",
         publisher: { "@id": `${url}/#organization` },
+      },
+      {
+        "@type": "Person",
+        "@id": ceoId,
+        name: CEO.name,
+        jobTitle: "代表取締役",
+        url: ceoId,
+        worksFor: { "@id": `${url}/#organization` },
+        description: CEO.profile.bio,
+        knowsAbout: ["AI開発", "機械学習", "AI教育", "データサイエンス"],
+        sameAs: [SOCIAL_URLS.x, SOCIAL_URLS.instagram, SOCIAL_URLS.facebook, SOCIAL_URLS.youtube],
       },
     ],
   };
