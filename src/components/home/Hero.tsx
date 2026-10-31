@@ -147,17 +147,8 @@ export function Hero() {
                 : { duration: 6, repeat: Infinity, ease: "easeInOut" }
             }
           >
-            {/* 写真円 */}
-            <motion.div
-              className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] md:w-[280px] lg:w-[360px] xl:w-[440px]"
-              initial={reduced ? false : { scale: 0.9 }}
-              animate={{ scale: 1 }}
-              transition={
-                reduced
-                  ? undefined
-                  : { duration: 1.1, delay: 0.45, ease: [0.16, 1, 0.3, 1] }
-              }
-            >
+            {/* 写真円。LCP要素のため、scale/opacityアニメーションは付けない（描画完了の判定が遅れてLCPが悪化するため） */}
+            <div className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] md:w-[280px] lg:w-[360px] xl:w-[440px]">
               <Image
                 src={HERO.photo.src}
                 alt={HERO.photo.alt}
@@ -167,7 +158,7 @@ export function Hero() {
                 className="object-cover"
                 style={{ objectPosition: HERO.photo.position }}
               />
-            </motion.div>
+            </div>
 
             {/* 外周リング */}
             <div className="pointer-events-none absolute -inset-4 rounded-full border border-[rgba(15,31,61,0.08)] sm:-inset-5 lg:-inset-6" />
