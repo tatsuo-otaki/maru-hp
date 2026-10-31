@@ -150,8 +150,8 @@ export function Hero() {
             {/* 写真円 */}
             <motion.div
               className="relative aspect-square w-[240px] overflow-hidden rounded-full bg-[#1A3050] shadow-[0_6px_48px_rgba(15,31,61,0.12)] sm:w-[340px] md:w-[280px] lg:w-[360px] xl:w-[440px]"
-              initial={reduced ? false : { scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
+              initial={reduced ? false : { scale: 0.9 }}
+              animate={{ scale: 1 }}
               transition={
                 reduced
                   ? undefined
